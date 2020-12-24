@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   MatSortModule,
@@ -37,6 +39,7 @@ const modules = [
   MatInputModule,
   MatSliderModule,
   MatDialogModule,
+  MatRadioModule,
   MatSelectModule,
   MatRippleModule,
   MatButtonModule,
@@ -44,6 +47,7 @@ const modules = [
   MatDividerModule,
   MatToolbarModule,
   MatCheckboxModule,
+  MatSnackBarModule,
   MatGridListModule,
   MatExpansionModule,
   MatPaginatorModule,

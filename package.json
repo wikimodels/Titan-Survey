@@ -16,13 +16,17 @@
     "@angular/common": "~9.1.4",
     "@angular/compiler": "~9.1.4",
     "@angular/core": "~9.1.4",
+    "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "~9.1.4",
     "@angular/material": "^9.2.4",
     "@angular/platform-browser": "~9.1.4",
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
+    "moment": "^2.29.1",
+    "ngx-device-detector": "^2.0.4",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "uuidv4": "^6.2.6",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
