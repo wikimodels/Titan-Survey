@@ -44,6 +44,9 @@ export class MultipleAnswerCardComponent implements OnInit {
 
     const answersIds = this.getFormControlsMembers(this.question);
     this.answersForm = new FormGroup(answersIds);
+
+    // Define BackwardButtons
+    this.showBackwardButton = this.question.question_id === 1 ? false : true;
   }
 
   onSubmit() {
@@ -67,9 +70,6 @@ export class MultipleAnswerCardComponent implements OnInit {
       const url = this.testQ.getRouterForNextQuestion(this.question);
       this.router.navigate([url]);
     }
-
-    // Define BackwardButtons
-    this.showBackwardButton = this.question.question_id === 1 ? false : true;
   }
 
   goBack() {

@@ -16,22 +16,17 @@
         {{question.question_text}}
       </span>
     </div>
-    <form [formGroup]="answersForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div>
+        <mat-grid-list cols="2" rowHeight="1:1" style="width: 320px; height: 320px;">
+          <mat-grid-tile *ngFor="let answer of question.question_answers"><img [src]="answer.answer_img_url"
+              [id]="answer.answer_id" [alt]="answer.answer_img_alt" (click)="choseAnswer($event)" [ngClass]="[imgStyle]"
+              class="initial">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-card-content>
 
-      <mat-card-content>
-        <div fxLayout="column" fxLayoutAlign="end start">
-
-          <ng-container>
-            <mat-grid-list cols="2" rowHeight="1:1" style="width: 350px; height: 350px;">
-              <mat-grid-tile *ngFor="let answer of question.question_answers"><img [src]="answer.answer_img_url"
-                  [id]="answer.answer_id" [alt]="answer.answer_img_alt" (click)="choseAnswer($event)"
-                  [ngClass]="[imgStyle]" class="initial">
-              </mat-grid-tile>
-            </mat-grid-list>
-          </ng-container>
-        </div>
-      </mat-card-content>
-    </form>
     <mat-card-actions align="end" class="actions-container">
       <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
       <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>

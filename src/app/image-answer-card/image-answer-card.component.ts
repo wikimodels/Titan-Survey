@@ -1,11 +1,4 @@
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageType } from 'src/models/message-types.model';
@@ -18,119 +11,114 @@ import { SnackBarService } from '../services/snackbar.service';
   selector: 'app-image-answer-card',
   templateUrl: './image-answer-card.component.html',
   styleUrls: ['./image-answer-card.component.css'],
-  animations: [
-    trigger('fadeInOut', [
-      state(
-        'void',
-        style({
-          opacity: 0,
-        })
-      ), //Not sure if this init state is necessary here, please leave a comment and I edit this answer.
-      transition(':enter', [
-        style({ opacity: '0' }),
-        animate('0.2s 100ms ease-in', style({ opacity: '1' })),
-      ]),
-      transition(':leave', [
-        style({ opacity: '1' }),
-        animate('0.2s ease-out', style({ opacity: '0' })),
-      ]),
-    ]),
-  ],
 })
-export class ImageAnswerCardComponent implements OnInit {
+export class ImageAnswerCardComponent implements OnInit, AfterViewInit {
   checked = false;
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
-  answersForm: FormGroup;
+
   question: Question;
   questionnaire: Questionnaire;
   showBackwardButton: boolean;
   imgStyle = 'initial';
-  chosenAnswersIds = [];
-  enableAnimation = false;
+  //chosenAnswersIds = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private testQ: QuestionnaireService,
+    private questionnaireService: QuestionnaireService,
     private snackbarService: SnackBarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService
   ) {}
 
   ngOnInit(): void {
     const question_id = +this.route.snapshot.params['question_id'];
-    this.questionnaire = this.testQ.getQuestionnaireSubj();
+    this.questionnaire = this.questionnaireService.getQuestionnaireSubj();
     this.question = this.questionnaireAnsweredService
       .getQuestionnaireSubj()
       .questions.find((q) => q.question_id === question_id);
-    console.log('answeredQuestion', this.question);
+
     if (this.question === undefined) {
       this.question = this.questionnaire.questions.find(
         (q) => q.question_id === question_id
       );
     }
-    const answersIds = this.getFormControlsMembers(this.question);
-    this.answersForm = new FormGroup(answersIds);
+
+    // Define Backward Button
+    this.showBackwardButton = this.question.question_id === 1 ? false : true;
   }
 
-  onSubmit() {
-    console.log(this.answersForm.value);
-  }
-
-  goBack() {
-    const url = this.testQ.getRouterForPreviousQuestion(this.question);
-    this.router.navigate([url]);
+  ngAfterViewInit() {
+    this.setImgsStyles(this.question);
   }
 
   choseAnswer(event: Event) {
+    const firstImgId = this.question.question_answers[0].answer_id.toString();
+
     let clickedImgId: string = (event.target as Element).id;
+
     let clickedImgClassName = (event.target as Element).attributes['class']
       .value;
-    this.enableAnimation = true;
-    const answersIds = this.question.question_answers.reduce((acc, cur) => {
-      if (cur.answer_id != 1) {
-        acc.push(cur.answer_id);
+
+    if (clickedImgId === firstImgId && clickedImgClassName == 'initial') {
+      const imgs = document.getElementsByTagName('img');
+      for (let i = 0; i < imgs.length; i++) {
+        imgs[i].className = 'initial';
       }
-      return acc;
-    }, []);
+    }
 
-    clickedImgClassName =
+    if (clickedImgId != firstImgId && clickedImgClassName == 'initial') {
+      document.getElementById(firstImgId).className = 'initial';
+    }
+
+    (event.target as Element).className =
       clickedImgClassName === 'initial' ? 'clicked' : 'initial';
-    (event.target as Element).className = clickedImgClassName;
-    const imgs = answersIds.reduce((acc, cur) => {
-      const el = document.getElementById(cur);
-      acc.push(el);
-      return acc;
-    }, []);
-
-    if (clickedImgId == '1' && clickedImgClassName == 'clicked') {
-      imgs.forEach((img) => {
-        img.className = 'initial';
-      });
-      (event.target as Element).className = 'clicked';
-    } else {
-      let element = document.getElementById('1');
-      element.className = 'initial';
-    }
-
-    // PICK UP ALL CLICKED IMAGES
-    let clickedImgs = document.getElementsByClassName('clicked');
-    const chosenAnswersIds = [];
-
-    for (let i = 0; i < clickedImgs.length; i++) {
-      chosenAnswersIds.push(+clickedImgs[i].id);
-    }
-
-    this.chosenAnswersIds = chosenAnswersIds;
-    console.log(chosenAnswersIds);
   }
 
-  private getFormControlsMembers(question: Question) {
-    const answersIds = {};
-    question.question_answers.forEach((answer) => {
-      answersIds[answer['answer_id']] = new FormControl(
-        answer.answer_boolean_reply
+  onSubmit() {
+    const clickedElements = document.getElementsByClassName('clicked');
+    if (clickedElements.length == 0) {
+      this.snackbarService.open(
+        'Пожалуйста, выберите ответ на вопрос',
+        'x',
+        MessageType.WARNING
       );
-    });
-    return answersIds;
+    } else {
+      this.question.question_answers.forEach((answer) => {
+        answer.answer_boolean_reply = false;
+      });
+
+      for (let i = 0; i < clickedElements.length; i++) {
+        let imgId = clickedElements[i].id;
+        this.question.question_answers[+imgId - 1].answer_boolean_reply = true;
+      }
+
+      this.questionnaireAnsweredService.addAnsweredQuestion(this.question);
+
+      //Set url
+      const url = this.questionnaireService.getRouterForNextQuestion(
+        this.question
+      );
+      this.router.navigate([url]);
+      console.log(this.questionnaireAnsweredService.getQuestionnaireSubj());
+    }
+  }
+
+  setImgsStyles(question: Question) {
+    console.log('number of q', question.question_answers);
+    if (question.question_answers.length > 0) {
+      question.question_answers.forEach((answer) => {
+        let element = document.getElementById(answer.answer_id.toString());
+        element.className =
+          answer.answer_boolean_reply === true ? 'clicked' : 'initial';
+      });
+    }
+  }
+
+  goBack() {
+    const url = this.questionnaireService.getRouterForPreviousQuestion(
+      this.question
+    );
+    this.router.navigate([url]);
   }
 }

@@ -26,7 +26,7 @@ export function getTestQuestionnaire() {
             answer_id: 2,
             answer_text: 'Проблемы в пояснице',
             answer_boolean_reply: false,
-            answer_img_url: 'assets/images/spine-lowerback2.jpg',
+            answer_img_url: 'assets/images/spine-lowerback.jpg',
             answer_img_alt: 'Проблемы в пояснице',
           },
           {
@@ -40,7 +40,7 @@ export function getTestQuestionnaire() {
             answer_id: 4,
             answer_text: 'Проблемы в шейном отделе позвоночника',
             answer_boolean_reply: false,
-            answer_img_url: 'assets/images/spine-neck3.jpg',
+            answer_img_url: 'assets/images/spine-neck.jpg',
             answer_img_alt: 'Проблемы в шейном отделе',
           },
         ],
