@@ -9,12 +9,16 @@ import { AppMaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MultipleAnswerCardComponent } from './multiple-answer-card/multiple-answer-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SnackBarService } from './services/snackbar.service';
 import { SingleAnswerCardComponent } from './single-answer-card/single-answer-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CompletionComponent } from './completion/completion.component';
 import { TextAnswerCardComponent } from './text-answer-card/text-answer-card.component';
+import { RatingAnswerCardComponent } from './rating-answer-card/rating-answer-card.component';
+import { RatingInputModule } from './rating-module/rating-input.module';
+import { ImageAnswerCardComponent } from './image-answer-card/image-answer-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,8 @@ import { TextAnswerCardComponent } from './text-answer-card/text-answer-card.com
     NavBarComponent,
     CompletionComponent,
     TextAnswerCardComponent,
+    RatingAnswerCardComponent,
+    ImageAnswerCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +41,7 @@ import { TextAnswerCardComponent } from './text-answer-card/text-answer-card.com
     AppMaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    RatingInputModule,
   ],
   providers: [SnackBarService],
   bootstrap: [AppComponent],

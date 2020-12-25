@@ -11,29 +11,37 @@ export function getTestQuestionnaire() {
     questions: [
       {
         question_id: 1,
-        question_type: QuestionType.SINGLE,
+        question_type: QuestionType.IMAGE,
         question_text:
           'Как часто Вас беспокоят боли из-за проблем с позвоночником (протрузии, грыжи и т.д.)?',
         question_answers: [
           {
             answer_id: 1,
-            answer_text: 'У меня нет проблем',
+            answer_text: 'Нет проблем',
             answer_boolean_reply: false,
+            answer_img_url: 'assets/images/spine-healthy.jpg',
+            answer_img_alt: 'Здоровый позвоночник',
           },
           {
             answer_id: 2,
-            answer_text: 'Только после больших нагрузок',
+            answer_text: 'Проблемы в пояснице',
             answer_boolean_reply: false,
+            answer_img_url: 'assets/images/spine-lowerback2.jpg',
+            answer_img_alt: 'Проблемы в пояснице',
           },
           {
             answer_id: 3,
-            answer_text: 'Время от времени',
+            answer_text: 'Проблемы в грудном отделе позвоночника',
             answer_boolean_reply: false,
+            answer_img_url: 'assets/images/spine-chest.jpg',
+            answer_img_alt: 'Проблемы в грудном отделе',
           },
           {
             answer_id: 4,
-            answer_text: 'Часто',
+            answer_text: 'Проблемы в шейном отделе позвоночника',
             answer_boolean_reply: false,
+            answer_img_url: 'assets/images/spine-neck3.jpg',
+            answer_img_alt: 'Проблемы в шейном отделе',
           },
         ],
       },
@@ -67,28 +75,33 @@ export function getTestQuestionnaire() {
       },
       {
         question_id: 3,
-        question_type: QuestionType.SINGLE,
+        question_type: QuestionType.RATING,
         question_text:
           'Как часто Вас беспокоят боли из-за проблем с позвоночником (протрузии, грыжи и т.д.)?',
         question_answers: [
           {
             answer_id: 1,
-            answer_text: 'У меня нет проблем',
+            answer_text: 'Очень плохо',
             answer_boolean_reply: false,
           },
           {
             answer_id: 2,
-            answer_text: 'Только после больших нагрузок',
+            answer_text: 'Плохо',
             answer_boolean_reply: false,
           },
           {
             answer_id: 3,
-            answer_text: 'Время от времени',
+            answer_text: 'Удолетворительно',
             answer_boolean_reply: false,
           },
           {
             answer_id: 4,
-            answer_text: 'Часто',
+            answer_text: 'Хорошо',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 5,
+            answer_text: 'Отлично',
             answer_boolean_reply: false,
           },
         ],

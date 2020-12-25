@@ -10,7 +10,7 @@ import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { SnackBarService } from '../services/snackbar.service';
-import { TestQuestionnaireService } from '../services/questionnaire.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
   selector: 'app-single-answer-card',
@@ -27,7 +27,7 @@ export class SingleAnswerCardComponent implements OnInit {
   showBackwardButton: boolean;
 
   constructor(
-    private testQ: TestQuestionnaireService,
+    private testQ: QuestionnaireService,
     private route: ActivatedRoute,
     private router: Router,
     private snackbarService: SnackBarService,

@@ -5,7 +5,7 @@ import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { SnackBarService } from '../services/snackbar.service';
-import { TestQuestionnaireService } from '../services/questionnaire.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
   selector: 'app-multiple-answer-card',
@@ -24,7 +24,7 @@ export class MultipleAnswerCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private testQ: TestQuestionnaireService,
+    private testQ: QuestionnaireService,
     private snackbarService: SnackBarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService
   ) {}

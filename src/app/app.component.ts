@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionnaireService } from './services/questionnaire.service';
 import { UserInfoService } from './services/user-info.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { UserInfoService } from './services/user-info.service';
 })
 export class AppComponent implements OnInit {
   title = 'Titan Surver';
-  constructor(private userInfoService: UserInfoService) {}
+  constructor(
+    private userInfoService: UserInfoService,
+    private qService: QuestionnaireService
+  ) {}
   ngOnInit() {
     this.userInfoService.getUserInfo();
+    this.qService.getTestQ();
   }
 }

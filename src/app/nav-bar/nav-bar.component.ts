@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TestQuestionnaireService } from '../services/questionnaire.service';
-import { getTestQuestionnaire } from './../consts/test-data';
-const q = getTestQuestionnaire();
+import { QuestionnaireService } from '../services/questionnaire.service';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -11,13 +10,13 @@ const q = getTestQuestionnaire();
 export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
-    private testQ: TestQuestionnaireService //private testQ: TestQuestionnaireService
+    private testQ: QuestionnaireService //private testQ: TestQuestionnaireService
   ) {}
 
   ngOnInit(): void {}
 
   getTestQ() {
-    this.testQ.getTestQ(q);
+    this.testQ.getTestQ();
   }
   goHome() {
     this.router.navigate(['/']);

@@ -1,0 +1,4 @@
+rating stars
+https://github.com/abdunnahid/nghacks/tree/master/main/projects/rating-input
+#2AD00C - healthy spine
+#D01111 - damaged spine

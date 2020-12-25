@@ -1,0 +1,51 @@
+img {
+  object-fit: cover;
+  height: inherit;
+  width: inherit;
+}
+
+.initial {
+  outline: 1px solid white;
+  outline-offset: -1px;
+  animation: fadeOut 0.1s ease-out;
+}
+
+.clicked {
+  outline: 11px solid orange;
+  outline-offset: -11px;
+  animation: fadeIn 0.1s ease-in;
+}
+/* animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    outline: 11px solid orange;
+    outline-offset: -11px;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+    outline: 11px solid orange;
+    outline-offset: -11px;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.red {
+  animation-delay: -12s;
+}
+
+.orange {
+  animation-delay: -6s;
+}

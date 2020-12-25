@@ -19,7 +19,9 @@ import { UserInfoService } from './user-info.service';
 import { getTestQuestionnaire } from '../consts/test-data';
 import {
   COMPLETION,
+  IMAGE_ANSWER,
   MULTI_ANSWER,
+  RATING_ANSWER,
   SINGLE_ANSWER,
 } from '../consts/routes.consts';
 const formatDisplayDate = 'DD-MM-YY';
@@ -28,7 +30,7 @@ const formatDisplayTime = 'HH:mm';
 @Injectable({
   providedIn: 'root',
 })
-export class TestQuestionnaireService {
+export class QuestionnaireService {
   constructor(private http: HttpClient) {}
 
   private _questionnaireSubj = new BehaviorSubject<Questionnaire>({
@@ -49,10 +51,10 @@ export class TestQuestionnaireService {
     this._questionnaireSubj.next(questionnaire);
   }
 
-  getTestQ(q) {
-    console.log('Quest before');
+  getTestQ() {
+    const testQuestionnaire = getTestQuestionnaire();
     this.http
-      .post<Questionnaire>(UPLOAD_TEST_QUESTIONNAIRE(), q)
+      .post<Questionnaire>(UPLOAD_TEST_QUESTIONNAIRE(), testQuestionnaire)
       .pipe(
         switchMap(() => this.http.get<Questionnaire>(GET_TEST_QUESTIONNAIRE())),
         map((q) => {
@@ -127,6 +129,12 @@ export class TestQuestionnaireService {
         break;
       case QuestionType.TEXT:
         url = SINGLE_ANSWER;
+        break;
+      case QuestionType.RATING:
+        url = RATING_ANSWER;
+        break;
+      case QuestionType.IMAGE:
+        url = IMAGE_ANSWER;
         break;
     }
     return url;

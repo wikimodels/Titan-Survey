@@ -22,10 +22,14 @@ export interface Answer {
   answer_text: string;
   answer_boolean_reply?: boolean;
   answer_text_reply?: boolean;
+  answer_img_url?: string;
+  answer_img_alt?: string;
 }
 
 export enum QuestionType {
   SINGLE = 'single',
   MULTIPLE = 'multiple',
   TEXT = 'text',
+  RATING = 'rating',
+  IMAGE = 'image',
 }

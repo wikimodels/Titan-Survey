@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
 import { UserInfoService } from '../services/user-info.service';
-import { TestQuestionnaireService } from '../services/questionnaire.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 import { Router } from '@angular/router';
 import {
   BASE,
@@ -22,10 +22,7 @@ import { QuestionType } from 'src/models/questionnaire.model';
 })
 export class HomeComponent implements OnInit {
   q = null;
-  constructor(
-    private testQ: TestQuestionnaireService,
-    private router: Router
-  ) {}
+  constructor(private testQ: QuestionnaireService, private router: Router) {}
   ngOnInit() {
     this.testQ.questionnaireSubj$.subscribe((v) => {
       this.q = v;
