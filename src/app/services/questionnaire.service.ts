@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   UPLOAD_TEST_QUESTIONNAIRE,
   GET_TEST_QUESTIONNAIRE,
+  GET_QUESTIONNAIRE_BY_QID,
 } from '../consts/urls.consts';
 import { UserInfo } from 'src/models/user-info.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -17,13 +18,8 @@ import {
 } from 'src/models/questionnaire.model';
 import { UserInfoService } from './user-info.service';
 import { getTestQuestionnaire } from '../consts/test-data';
-import {
-  COMPLETION,
-  IMAGE_ANSWER,
-  MULTI_ANSWER,
-  RATING_ANSWER,
-  SINGLE_ANSWER,
-} from '../consts/routes.consts';
+import { QuestionService } from './question-services/question.service';
+
 const formatDisplayDate = 'DD-MM-YY';
 const formatDisplayTime = 'HH:mm';
 
@@ -31,7 +27,7 @@ const formatDisplayTime = 'HH:mm';
   providedIn: 'root',
 })
 export class QuestionnaireService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private qService: QuestionService) {}
 
   private _questionnaireSubj = new BehaviorSubject<Questionnaire>({
     questionnaire_id: null,
@@ -39,7 +35,7 @@ export class QuestionnaireService {
     questions: [],
     creation_date: null,
     modification_date: null,
-    questions_total_number: 0,
+    //questions_total_number: 0,
   });
   questionnaireSubj$ = this._questionnaireSubj.asObservable();
 
@@ -51,92 +47,104 @@ export class QuestionnaireService {
     this._questionnaireSubj.next(questionnaire);
   }
 
-  getTestQ() {
+  getQuestionnaireByQid(qid: string) {
+    this.http
+      .get<Questionnaire>(GET_QUESTIONNAIRE_BY_QID(qid))
+      .pipe(
+        tap((q) => {
+          console.log('Row q', q);
+        }),
+        map((q: Questionnaire) => {
+          const length = q.questions.length;
+          q.questions.map((q) => (q.questions_total_number = length));
+          return q;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions.map((q) => {
+            q = this.qService.setNextQuestionUrl(q, questionnaire.questions);
+            return q;
+          });
+          return questionnaire;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions.map((q) => {
+            q = this.qService.setPreviousQuestionUrl(
+              q,
+              questionnaire.questions
+            );
+            return q;
+          });
+          return questionnaire;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.first_question_url = this.qService.getFirstQuestionUrl(
+            questionnaire.questions[0]
+          );
+          return questionnaire;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions = this.qService.setStylesForImgAnswers(
+            questionnaire.questions
+          );
+          return questionnaire;
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(error);
+        })
+      )
+      .subscribe((questionnaire: Questionnaire) => {
+        console.log('Questionnaire from Cloud', questionnaire);
+        this.setQuestionnaireSubj(questionnaire);
+      });
+  }
+
+  updateInternally(question: Question) {
+    const questionnaire = this.getQuestionnaireSubj();
+    const index = question.question_id - 1;
+    questionnaire.questions[index] = question;
+    console.log('updated questionnaire ', questionnaire);
+    this.setQuestionnaireSubj(questionnaire);
+  }
+
+  getQuestionnaire() {
     const testQuestionnaire = getTestQuestionnaire();
     this.http
       .post<Questionnaire>(UPLOAD_TEST_QUESTIONNAIRE(), testQuestionnaire)
       .pipe(
         switchMap(() => this.http.get<Questionnaire>(GET_TEST_QUESTIONNAIRE())),
-        map((q) => {
-          q.questions_total_number = q.questions.length;
+        map((q: Questionnaire) => {
+          const length = q.questions.length;
+          q.questions.map((q) => (q.questions_total_number = length));
           return q;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions.map((q) => {
+            q = this.qService.setNextQuestionUrl(q, questionnaire.questions);
+            return q;
+          });
+          return questionnaire;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions.map((q) => {
+            q = this.qService.setPreviousQuestionUrl(
+              q,
+              questionnaire.questions
+            );
+            return q;
+          });
+          return questionnaire;
+        }),
+        map((questionnaire: Questionnaire) => {
+          questionnaire.questions = this.qService.setStylesForImgAnswers(
+            questionnaire.questions
+          );
+          return questionnaire;
         })
       )
-      .subscribe((q: Questionnaire) => {
-        this.setQuestionnaireSubj(q);
+      .subscribe((questionnaire: Questionnaire) => {
+        console.log('Questionnaire from Cloud', questionnaire);
+        this.setQuestionnaireSubj(questionnaire);
       });
-  }
-
-  getRouterForFirstQuestion() {
-    const type = this.getQuestionnaireSubj().questions[0].question_type;
-    let url = this.getUrlBase(type);
-    return url + '/1';
-  }
-
-  getRouterForPreviousQuestion(question: Question) {
-    let previousQuestion: Question;
-    let url: string;
-
-    const next_question_id =
-      question.question_id != 1 ? question.question_id - 1 : 1;
-    console.log('Previous Q-id', next_question_id);
-    const questionnaire = this.getQuestionnaireSubj();
-
-    previousQuestion = questionnaire.questions.find(
-      (q) => q.question_id == next_question_id
-    );
-
-    console.log('NEXT Q', previousQuestion);
-    url = `${this.getUrlBase(
-      previousQuestion.question_type
-    )}/${next_question_id}`;
-    console.log('URL', url);
-    return url;
-  }
-
-  getRouterForNextQuestion(question: Question) {
-    let nextQuestion: Question;
-    let url: string;
-    const next_question_id = question.question_id + 1;
-    console.log('NEXT Q-id', next_question_id);
-    const questionnaire = this.getQuestionnaireSubj();
-    console.log('Questionnaire', questionnaire);
-
-    if (question.question_id < questionnaire.questions_total_number) {
-      nextQuestion = questionnaire.questions.find(
-        (q) => q.question_id == next_question_id
-      );
-      console.log('NEXT Q', nextQuestion);
-
-      url = `${this.getUrlBase(
-        nextQuestion.question_type
-      )}/${next_question_id}`;
-    } else {
-      url = COMPLETION;
-    }
-    console.log('URL', url);
-    return url;
-  }
-
-  getUrlBase(type) {
-    let url = '';
-    switch (type) {
-      case QuestionType.SINGLE:
-        url = SINGLE_ANSWER;
-        break;
-      case QuestionType.MULTIPLE:
-        url = MULTI_ANSWER;
-        break;
-      case QuestionType.TEXT:
-        url = SINGLE_ANSWER;
-        break;
-      case QuestionType.RATING:
-        url = RATING_ANSWER;
-        break;
-      case QuestionType.IMAGE:
-        url = IMAGE_ANSWER;
-        break;
-    }
-    return url;
   }
 }

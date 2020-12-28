@@ -1,2 +1,6 @@
-<app-nav-bar></app-nav-bar>
-<app-home class="home-container"></app-home>
+<mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate" color="warn" class="progress-bar"></mat-progress-bar>
+<div class="app-container">
+  <app-nav-bar></app-nav-bar>
+  <app-greetings></app-greetings>
+  <app-home></app-home>
+</div>

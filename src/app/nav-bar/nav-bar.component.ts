@@ -16,9 +16,14 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {}
 
   getTestQ() {
-    this.testQ.getTestQ();
+    this.testQ.getQuestionnaire();
   }
   goHome() {
     this.router.navigate(['/']);
+  }
+
+  startQ() {
+    const url = this.testQ.getQuestionnaireSubj().first_question_url;
+    this.router.navigate([url]);
   }
 }

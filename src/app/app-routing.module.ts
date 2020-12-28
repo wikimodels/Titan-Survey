@@ -1,68 +1,57 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {
-  BASE,
-  HOME,
-  SINGLE_ANSWER,
-  MULTI_ANSWER,
-  TEXT_ANSWER,
-  RATING_ANSWER,
-  COMPLETION,
-  IMAGE_ANSWER,
-} from '../app/consts/routes.consts';
+import { COMPLETION } from '../app/consts/routes.consts';
 import { CompletionComponent } from './completion/completion.component';
 
 import { HomeComponent } from './home/home.component';
-import { ImageAnswerCardComponent } from './image-answer-card/image-answer-card.component';
-import { MultipleAnswerCardComponent } from './multiple-answer-card/multiple-answer-card.component';
-import { RatingAnswerCardComponent } from './rating-answer-card/rating-answer-card.component';
-import { SingleAnswerCardComponent } from './single-answer-card/single-answer-card.component';
-import { TextAnswerCardComponent } from './text-answer-card/text-answer-card.component';
+import { ImageSingleAnswerComponent } from './image-single-answer/image-single-answer.component';
+import { CheckboxMultipleAnswerComponent } from './checkbox-multiple-answer/checkbox-multiple-answer.component';
+import { RatingAnswerComponent } from './rating-answer/rating-answer.component';
+import { SingleRadioAnswerComponent } from './single-radio-answer/single-radio-answer.component';
+
+import { TextAnswerComponent } from './text-answer/text-answer.component';
+import { ImageMultiAnswerComponent } from './image-multi-answer/image-multi-answer.component';
+import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
+import { QuestionType } from 'src/models/questionnaire.model';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: `/`,
     pathMatch: 'full',
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
-    path: SINGLE_ANSWER + '/:question_id',
-    component: SingleAnswerCardComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: QuestionType.RADIO_SINGLE_ANSWER + '/:question_id',
+    component: SingleRadioAnswerComponent,
   },
   {
-    path: MULTI_ANSWER + '/:question_id',
-    component: MultipleAnswerCardComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: QuestionType.BUTTON_SINGLE_ANSWER + '/:question_id',
+    component: ButtonSingleAnswerComponent,
   },
   {
-    path: TEXT_ANSWER + '/:question_id',
-    component: TextAnswerCardComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: QuestionType.CHECKBOX_MULTIPLE_ANSWER + '/:question_id',
+    component: CheckboxMultipleAnswerComponent,
   },
   {
-    path: RATING_ANSWER + '/:question_id',
-    component: RatingAnswerCardComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: QuestionType.TEXT + '/:question_id',
+    component: TextAnswerComponent,
   },
   {
-    path: IMAGE_ANSWER + '/:question_id',
-    component: ImageAnswerCardComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: QuestionType.RATING_ANSWER + '/:question_id',
+    component: RatingAnswerComponent,
+  },
+  {
+    path: QuestionType.IMAGE_SINGLE_ANSWER + '/:question_id',
+    component: ImageSingleAnswerComponent,
+  },
+  {
+    path: QuestionType.IMAGE_MULTI_ANSWER + '/:question_id',
+    component: ImageMultiAnswerComponent,
   },
   {
     path: COMPLETION,
     component: CompletionComponent,
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
 ];
 

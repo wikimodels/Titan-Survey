@@ -1,0 +1,32 @@
+<ng-container *ngIf="question">
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <app-question-counter [currentQuestion]="question.question_id"
+      [questionsTotalNumber]="question.questions_total_number"></app-question-counter>
+
+
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <mat-card>
+        <div class="question-header-container">
+          <span class="question-card-font">
+            {{question.question_text}}
+          </span>
+        </div>
+        <mat-card-content>
+          <div>
+            <mat-grid-list [cols]="columns" rowHeight="1:1" [ngClass]="[gridStyle]">
+              <mat-grid-tile *ngFor="let answer of question.question_answers" matRipple [matRippleColor]="rippleColor">
+                <img [src]="answer.answer_img_url" [id]="answer.answer_id" [alt]="answer.answer_img_alt"
+                  (click)="choseAnswer(answer.answer_id)" [ngClass]="[answer.answer_clicked_style]">
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions align="end" class="actions-container">
+          <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+          <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

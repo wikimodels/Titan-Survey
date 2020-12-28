@@ -1,0 +1,37 @@
+<ng-container *ngIf="question">
+  <div fxLayout="column" fxLayoutAlign="space-around center" class="card-container">
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="counter">
+      <div class="m-e-z4">
+        <div class="number-circle">{{question.question_id}}</div>
+      </div>
+      <div class="question-card-font">
+        из
+      </div>
+      <div class="m-e-z4">
+        <div class="number-circle">{{question.questions_total_number}}</div>
+      </div>
+    </div>
+    <mat-card class="question-card mat-elevation-z7">
+      <div class="question-header-container">
+        <span class="question-card-font">
+          {{question.question_text}}
+        </span>
+      </div>
+      <form [formGroup]="answersForm" (ngSubmit)="onSubmit()" id="wishes">
+        <mat-card-content>
+          <div fxLayout="column" fxLayoutAlign="end start">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Ваши предложения</mat-label>
+              <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="13"
+                formControlName="wishes" (keypress)="supressEnterPropagation($event)"></textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </form>
+      <mat-card-actions align="end" class="actions-container">
+        <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+        <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-container>

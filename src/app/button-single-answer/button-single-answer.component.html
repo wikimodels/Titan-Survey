@@ -1,0 +1,31 @@
+<ng-container *ngIf="question">
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <app-question-counter [currentQuestion]="question.question_id"
+      [questionsTotalNumber]="question.questions_total_number"></app-question-counter>
+
+
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+      <mat-card>
+        <div class="question-header-container">
+          <span class="question-card-font">
+            {{question.question_text}}
+          </span>
+        </div>
+        <mat-card-content>
+          <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+            <button mat-raised-button class="mat-elevation-z3 button-question" [ngClass]="[answer.answer_clicked_style]"
+              [id]="answer.answer_id" *ngFor="let answer of question.question_answers"
+              (click)="onClick(answer.answer_id)">{{
+              answer.answer_text}}</button>
+          </div>
+
+        </mat-card-content>
+
+        <mat-card-actions align="end" class="actions-container">
+          <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+          <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

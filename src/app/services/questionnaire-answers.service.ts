@@ -24,7 +24,7 @@ export class QuestionnaireAnswersService {
     questions: [],
     creation_date: null,
     modification_date: null,
-    questions_total_number: 0,
+    //questions_total_number: 0,
   });
   questionnaireAnswersSubj$ = this._questionnaireAnswersSubj.asObservable();
 
