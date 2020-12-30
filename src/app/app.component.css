@@ -1,9 +1,5 @@
-.app-container {
-  padding-top: 70px;
-}
 .progress-bar {
   position: absolute;
   top: 0;
   z-index: 100;
-  height: 5px;
 }

@@ -19,6 +19,7 @@ import {
 import { UserInfoService } from './user-info.service';
 import { getTestQuestionnaire } from '../consts/test-data';
 import { QuestionService } from './question-services/question.service';
+import { IsLoadingService } from '@service-work/is-loading';
 
 const formatDisplayDate = 'DD-MM-YY';
 const formatDisplayTime = 'HH:mm';
@@ -27,7 +28,11 @@ const formatDisplayTime = 'HH:mm';
   providedIn: 'root',
 })
 export class QuestionnaireService {
-  constructor(private http: HttpClient, private qService: QuestionService) {}
+  constructor(
+    private http: HttpClient,
+    private qService: QuestionService,
+    private isLoadingService: IsLoadingService
+  ) {}
 
   private _questionnaireSubj = new BehaviorSubject<Questionnaire>({
     questionnaire_id: null,
@@ -51,8 +56,8 @@ export class QuestionnaireService {
     this.http
       .get<Questionnaire>(GET_QUESTIONNAIRE_BY_QID(qid))
       .pipe(
-        tap((q) => {
-          console.log('Row q', q);
+        tap(() => {
+          this.isLoadingService.add();
         }),
         map((q: Questionnaire) => {
           const length = q.questions.length;
@@ -87,6 +92,9 @@ export class QuestionnaireService {
             questionnaire.questions
           );
           return questionnaire;
+        }),
+        tap(() => {
+          this.isLoadingService.remove();
         }),
         catchError((error) => {
           console.log(error);
@@ -146,5 +154,9 @@ export class QuestionnaireService {
         console.log('Questionnaire from Cloud', questionnaire);
         this.setQuestionnaireSubj(questionnaire);
       });
+  }
+
+  getFirstQuestionUrl() {
+    return this.getQuestionnaireSubj().first_question_url;
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { UserInfoService } from '../services/user-info.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,6 +11,7 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
+    private userS: UserInfoService,
     private testQ: QuestionnaireService //private testQ: TestQuestionnaireService
   ) {}
 
@@ -26,4 +28,5 @@ export class NavBarComponent implements OnInit {
     const url = this.testQ.getQuestionnaireSubj().first_question_url;
     this.router.navigate([url]);
   }
+  getIp() {}
 }

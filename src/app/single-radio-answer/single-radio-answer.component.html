@@ -1,4 +1,35 @@
-<ng-container *ngIf="question">
+<div *ngIf="question" fxLayout="column" fxLayoutAlign="space-around center" class="question-outer-container">
+  <div class="question-inner-container">
+    <app-question-counter [currentQuestion]="question.question_id"
+      [questionsTotalNumber]="question.questions_total_number"></app-question-counter>
+
+    <mat-card fxLayout="column" fxLayoutAlign="start start">
+      <div class="question-header">
+        {{question.question_text}}
+      </div>
+      <mat-card-content>
+        <form [formGroup]="answersForm" (ngSubmit)="onSubmit()">
+          <div fxLayout="column" fxLayoutAlign="end start">
+            <mat-radio-group class="radio-vert-group" formControlName="answer_id">
+              <mat-radio-button class="radio-vert-element" *ngFor="let answer of question.question_answers"
+                [value]="answer.answer_id">
+                {{answer.answer_text}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions align="end" class="card-actions">
+        <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+        <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+<!-- <ng-container *ngIf="question">
   <div fxLayout="column" fxLayoutAlign="space-around center" class="card-container">
     <div fxLayout="row" fxLayoutAlign="space-around center" class="counter">
       <div class="m-e-z4">
@@ -35,4 +66,4 @@
       </mat-card-actions>
     </mat-card>
   </div>
-</ng-container>
+</ng-container> -->

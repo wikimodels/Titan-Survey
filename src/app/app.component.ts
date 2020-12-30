@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 import { IsLoadingService } from '@service-work/is-loading';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { UserInfoService } from './services/user-info.service';
+import { GREETIGNS } from './consts/routes.consts';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit() {
+    this.router.navigate(['radio-single-answer/5']);
     this.userInfoService.getUserInfo();
     this.qService.getQuestionnaireByQid('d0819d57-e5d9-44f0-ab42-af03b231aefe');
 
@@ -50,9 +52,7 @@ export class AppComponent implements OnInit {
         }
 
         // Else navigation has ended, so `remove()` a loading indicator
-        setTimeout(() => {
-          this.isLoadingService.remove();
-        }, 4000);
+        this.isLoadingService.remove();
       });
   }
 }

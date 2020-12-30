@@ -1,31 +1,25 @@
-<ng-container *ngIf="question">
-  <div fxLayout="column" fxLayoutAlign="space-around center">
+<div *ngIf="question" fxLayout="column" fxLayoutAlign="space-around center" class="question-outer-container">
+  <div class="question-inner-container">
     <app-question-counter [currentQuestion]="question.question_id"
       [questionsTotalNumber]="question.questions_total_number"></app-question-counter>
 
-
-    <div fxLayout="column" fxLayoutAlign="space-around center">
-      <mat-card>
-        <div class="question-header-container">
-          <span class="question-card-font">
-            {{question.question_text}}
-          </span>
+    <mat-card fxLayout="column" fxLayoutAlign="start start">
+      <div class="question-header">
+        {{question.question_text}}
+      </div>
+      <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+          <button mat-raised-button class="mat-elevation-z3 button-question" [ngClass]="[answer.answer_clicked_style]"
+            [id]="answer.answer_id" *ngFor="let answer of question.question_answers"
+            (click)="onClick(answer.answer_id)">{{
+            answer.answer_text}}</button>
         </div>
-        <mat-card-content>
-          <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="20px">
-            <button mat-raised-button class="mat-elevation-z3 button-question" [ngClass]="[answer.answer_clicked_style]"
-              [id]="answer.answer_id" *ngFor="let answer of question.question_answers"
-              (click)="onClick(answer.answer_id)">{{
-              answer.answer_text}}</button>
-          </div>
+      </mat-card-content>
 
-        </mat-card-content>
-
-        <mat-card-actions align="end" class="actions-container">
-          <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
-          <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+      <mat-card-actions align="end" class="card-actions">
+        <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+        <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-</ng-container>
+</div>

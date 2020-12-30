@@ -9,9 +9,16 @@ import { UserInfo } from 'src/models/user-info.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { QuestionnaireAnswersService } from './questionnaire-answers.service';
 
+//import { findIP, addIP } from '../../assets/scripts/ip';
+
 const formatDisplayDate = 'DD-MM-YY';
 const formatDisplayTime = 'HH:mm';
-
+declare global {
+  interface Window {
+    ActiveXObject: any;
+  }
+}
+declare var ActiveXObject: (type: string) => void;
 @Injectable({
   providedIn: 'root',
 })
@@ -22,23 +29,18 @@ export class UserInfoService {
     private questionnaireService: QuestionnaireAnswersService
   ) {}
 
-  // private _userInfoSubj = new BehaviorSubject<UserInfo>(null);
-  // userInfoSubj$ = this._userInfoSubj.asObservable();
-
-  // getUserInfoSubj(): UserInfo {
-  //   return this._userInfoSubj.getValue();
-  // }
-
-  // setUserInfoSubj(userInfo: UserInfo) {
-  //   this._userInfoSubj.next(userInfo);
-  // }
-
   getUserInfo() {
     return this.http
       .get(IPIFY_IP())
       .pipe(
+        map((value) => {
+          console.log('VALUE', value);
+          const ip = value['ip'].split(',')[0];
+          console.log('IP', ip);
+          return ip;
+        }),
         switchMap((value) => {
-          return this.http.get<UserInfo>(GET_USER_INFO_BY_IP(value['ip']));
+          return this.http.get<UserInfo>(GET_USER_INFO_BY_IP(value));
         }),
         map((value) => {
           const deviceInfo = this.deviceService.getDeviceInfo();
@@ -49,6 +51,7 @@ export class UserInfoService {
         })
       )
       .subscribe((value: UserInfo) => {
+        console.log('USER Info', value);
         this.questionnaireService.addUserInfo(value);
       });
   }

@@ -1,10 +1,11 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="show">
-    <div class="greetings-container">
+<app-nav-bar></app-nav-bar>
+<div class="greetings-container" fxLayout="row" fxLayoutAlign="space-around center">
+  <div *ngIf="show">
+    <div>
       <h1>Just a monent!</h1>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!show">
-    <h1>Loaded!</h1>
+  <div *ngIf="!show">
+    <button mat-raised-button (click)="startSurvey()">START SURVEY</button>
   </div>
 </div>

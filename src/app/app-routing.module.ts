@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { COMPLETION } from '../app/consts/routes.consts';
+import { COMPLETION, GREETIGNS } from '../app/consts/routes.consts';
 import { CompletionComponent } from './completion/completion.component';
 
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,7 @@ import { TextAnswerComponent } from './text-answer/text-answer.component';
 import { ImageMultiAnswerComponent } from './image-multi-answer/image-multi-answer.component';
 import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
 import { QuestionType } from 'src/models/questionnaire.model';
+import { GreetingsComponent } from './greetings/greetings.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: QuestionType.IMAGE_MULTI_ANSWER + '/:question_id',
     component: ImageMultiAnswerComponent,
+  },
+  {
+    path: GREETIGNS,
+    component: GreetingsComponent,
   },
   {
     path: COMPLETION,
