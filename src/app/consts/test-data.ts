@@ -173,7 +173,8 @@ export function getTestQuestionnaire() {
       {
         question_id: 7,
         question_type: QuestionType.IMAGE_SINGLE_ANSWER,
-        question_text: 'Ваш пол?',
+        question_text:
+          'Звездны богачей неправд. Бледному принести звездной подобные теряться проблеск. Се лобно высот Уметь вы Се звона об Долги яр от втечь. Душ Сын вам чья Род это тул.',
         question_answers: [
           {
             answer_id: 0,
@@ -189,12 +190,27 @@ export function getTestQuestionnaire() {
             answer_img_url: 'assets/images/female-grey.jpg',
             answer_img_alt: 'Женский пол',
           },
+          {
+            answer_id: 2,
+            answer_text: 'Мужской',
+            answer_boolean_reply: false,
+            answer_img_url: 'assets/images/male-grey.jpg',
+            answer_img_alt: 'Мужской пол',
+          },
+          {
+            answer_id: 3,
+            answer_text: 'Женский',
+            answer_boolean_reply: false,
+            answer_img_url: 'assets/images/female-grey.jpg',
+            answer_img_alt: 'Женский пол',
+          },
         ],
       },
       {
         question_id: 8,
         question_type: QuestionType.IMAGE_SINGLE_ANSWER,
-        question_text: 'Ваш пол?',
+        question_text:
+          'Звездны богачей неправд. Бледному принести звездной подобные теряться проблеск. Се лобно высот Уметь вы Се звона об Долги яр от втечь. Душ Сын вам чья Род это тул.',
         question_answers: [
           {
             answer_id: 0,
@@ -205,6 +221,13 @@ export function getTestQuestionnaire() {
           },
           {
             answer_id: 1,
+            answer_text: 'Мужской',
+            answer_boolean_reply: false,
+            answer_img_url: 'assets/images/male-boxer.jpg',
+            answer_img_alt: 'Мужской пол',
+          },
+          {
+            answer_id: 2,
             answer_text: 'Мужской',
             answer_boolean_reply: false,
             answer_img_url: 'assets/images/male-boxer.jpg',

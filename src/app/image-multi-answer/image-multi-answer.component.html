@@ -7,7 +7,34 @@
       <div class="question-header">
         {{question.question_text}}
       </div>
-      <mat-card-content>
+      <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" class="content-container">
+        <mat-grid-list [cols]="columns" [rowHeight]="rowheight" [ngClass]="[gridStyle]" [style.width]="gridWidth">
+          <mat-grid-tile *ngFor="let answer of question.question_answers" matRipple [matRippleColor]="rippleColor">
+            <img [src]="answer.answer_img_url" [id]="answer.answer_id" [alt]="answer.answer_img_alt"
+              (click)="choseAnswer(answer.answer_id)" [ngClass]="[answer.answer_clicked_style]">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+
+      <mat-card-actions align="end" class="card-actions">
+        <button mat-raised-button (click)="goBack()" *ngIf="showBackwardButton">НАЗАД</button>
+        <button mat-raised-button (click)="onSubmit()">ДАЛЬШЕ</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+<!-- <div *ngIf="question" fxLayout="column" fxLayoutAlign="space-around center" class="question-outer-container">
+  <div class="question-inner-container">
+    <app-question-counter [currentQuestion]="question.question_id"
+      [questionsTotalNumber]="question.questions_total_number"></app-question-counter>
+
+    <mat-card fxLayout="column" fxLayoutAlign="start start">
+      <div class="question-header">
+        {{question.question_text}}
+      </div>
+      <mat-card-content fxLayoutAling="start center" style="width: 60%;">
         <div>
           <mat-grid-list [cols]="columns" rowHeight="1:1" [ngClass]="[gridStyle]">
             <mat-grid-tile *ngFor="let answer of question.question_answers" matRipple [matRippleColor]="rippleColor">
@@ -57,4 +84,4 @@
       </mat-card>
     </div>
   </div>
-</ng-container> -->
+</ng-container> --> -->

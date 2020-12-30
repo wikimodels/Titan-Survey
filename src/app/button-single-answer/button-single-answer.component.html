@@ -7,12 +7,13 @@
       <div class="question-header">
         {{question.question_text}}
       </div>
-      <mat-card-content>
-        <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+      <mat-card-content class="single-button-content">
+        <div fxLayout="column" fxLayoutAlign.xs="space-around start" fxLayoutAlign="space-around center"
+          fxLayoutGap="20px">
           <button mat-raised-button class="mat-elevation-z3 button-question" [ngClass]="[answer.answer_clicked_style]"
             [id]="answer.answer_id" *ngFor="let answer of question.question_answers"
-            (click)="onClick(answer.answer_id)">{{
-            answer.answer_text}}</button>
+            (click)="onClick(answer.answer_id)"><span class="button-text">{{
+              answer.answer_text}}</span></button>
         </div>
       </mat-card-content>
 

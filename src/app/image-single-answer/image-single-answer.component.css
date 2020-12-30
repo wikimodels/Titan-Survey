@@ -35,7 +35,7 @@ img {
 }
 
 .xl-grid {
-  width: 800px;
+  background-color: transparent;
 }
 
 @keyframes fadeOut {

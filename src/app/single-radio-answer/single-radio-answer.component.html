@@ -9,7 +9,7 @@
       </div>
       <mat-card-content>
         <form [formGroup]="answersForm" (ngSubmit)="onSubmit()">
-          <div fxLayout="column" fxLayoutAlign="end start">
+          <div fxLayout="column" fxLayoutAlign="end start" class="stars-container">
             <mat-radio-group class="radio-vert-group" formControlName="answer_id">
               <mat-radio-button class="radio-vert-element" *ngFor="let answer of question.question_answers"
                 [value]="answer.answer_id">

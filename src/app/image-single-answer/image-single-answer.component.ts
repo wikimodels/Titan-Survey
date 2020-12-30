@@ -30,6 +30,8 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   showBackwardButton: boolean;
   sub: Subscription;
   rippleColor = 'rgba(255, 0, 0, 0.1)';
+  gridWidth = '';
+  rowheight = '';
 
   constructor(
     private deviceService: DeviceDetectorService,
@@ -51,19 +53,23 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
           this.question = questionnaire.questions.find(
             (q) => q.question_id === urlQuestionId
           );
+
+          if (this.deviceService.isMobile()) {
+            this.gridStyle = 'xs-grid';
+            this.columns = 2;
+            this.rowheight = '1:1';
+          } else {
+            this.gridStyle = 'xl-grid';
+            this.columns = this.question.question_answers.length;
+            this.gridWidth = `${this.columns * 200}px`;
+            this.rowheight = '200px';
+          }
+
           this.showBackwardButton =
             this.question.question_id === 1 ? false : true;
         }
       }
     );
-
-    if (this.deviceService.isMobile()) {
-      this.gridStyle = 'xs-grid';
-      this.columns = 2;
-    } else {
-      this.gridStyle = 'xl-grid';
-      this.columns = 4;
-    }
   }
 
   choseAnswer(answerId: number) {

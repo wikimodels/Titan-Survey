@@ -9,80 +9,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* .mat-checkbox-inner-container {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
-}
-
-.z2 {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-}
-
-.number-circle {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 8px;
-
-  background: #fff;
-  border: 2px solid #fff;
-  color: #666;
-  text-align: center;
-
-  font: 32px Roboto, sans-serif;
-}
-
-.m-e-z3 {
-  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
-    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 50%;
-}
-.m-e-z4 {
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 50%;
-}
-.m-e-z5 {
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 50%;
-}
-
-.counter {
-  width: 180px;
-  padding-bottom: 25px;
-}
-.question-card-font {
-  font: 1.3em Roboto, sans-serif;
-}
-.question-header-container {
-  padding-bottom: 0px;
-}
-.checkbox-margin {
-  margin: 0 15px;
-  padding-bottom: 4px;
-}
-
-.question-radio-group {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-}
-
-
-.question-radio-button {
-  margin: 5px;
-}
-
-.actions-container {
-  padding-bottom: 1em !important;
-}
-
-.question-card {
-  width: calc(0.85 * 100vw);
-} */
-
 .info-snackbar {
   color: whitesmoke;
   background-color: #1f865b;
@@ -95,7 +21,7 @@ body {
 /* NEW STYLES */
 @media screen and (max-width: 499px) {
   .app-container {
-    padding-top: 30px;
+    padding-top: 15px;
   }
 
   .mat-card:not([class*="mat-elevation-z"]) {
@@ -117,8 +43,8 @@ body {
   }
 
   .question-header {
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 400;
     line-height: 28px;
     margin-bottom: 15px;
     text-align: left;
@@ -147,7 +73,7 @@ body {
     margin-top: 3px;
     margin-bottom: 3px;
     font-size: 18px !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
   }
 
   .radio-vert-group {
@@ -159,6 +85,96 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 18px !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
   }
+  .stars-container {
+    width: 90vw !important;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .app-container {
+    padding-top: 20px;
+  }
+
+  /* .mat-card:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  } */
+
+  .question-outer-container {
+    min-width: 400px;
+    height: auto;
+  }
+  .question-inner-container {
+    width: 850px;
+  }
+  .counter {
+    margin: 0 auto;
+    padding-bottom: 10px;
+    font-size: 26px;
+    font-weight: 300;
+  }
+
+  .question-header {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .card-actions {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .text-field {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .button-question {
+    width: 600px !important;
+    text-align: left !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    padding-bottom: 6px !important;
+    padding-top: 6px !important;
+  }
+
+  .checkbox {
+    margin-left: 30px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+  }
+
+  .radio-vert-group {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px !important;
+  }
+  .radio-vert-element {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+  }
+  .stars-container {
+    width: 77vw !important;
+  }
+  .single-button-content {
+    width: 100%;
+  }
+  .content-container {
+    width: 100%;
+  }
+}
+
+.mat-card > .mat-card-actions:last-child {
+  margin-bottom: 0px !important;
+  padding-bottom: 0 !important;
+}
+.button-text {
+  font-weight: 300;
 }
