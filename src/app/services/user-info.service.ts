@@ -34,9 +34,7 @@ export class UserInfoService {
       .get(IPIFY_IP())
       .pipe(
         map((value) => {
-          console.log('VALUE', value);
           const ip = value['ip'].split(',')[0];
-          console.log('IP', ip);
           return ip;
         }),
         switchMap((value) => {
@@ -44,6 +42,7 @@ export class UserInfoService {
         }),
         map((value) => {
           const deviceInfo = this.deviceService.getDeviceInfo();
+          console.log('UI', deviceInfo);
           value.os = deviceInfo.os;
           value.os_version = deviceInfo.os_version;
           value.browser = deviceInfo.browser;
