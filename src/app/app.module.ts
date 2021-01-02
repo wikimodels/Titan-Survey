@@ -25,6 +25,7 @@ import { ImageMultiAnswerComponent } from './image-multi-answer/image-multi-answ
 import { CheckboxMultipleAnswerComponent } from './checkbox-multiple-answer/checkbox-multiple-answer.component';
 import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
 import { GreetingsComponent } from './greetings/greetings.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { GreetingsComponent } from './greetings/greetings.component';
     ReactiveFormsModule,
     RatingInputModule,
   ],
-  providers: [SnackBarService],
+  providers: [SnackBarService, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

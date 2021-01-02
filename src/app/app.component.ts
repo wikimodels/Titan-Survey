@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import {
   NavigationStart,
   NavigationEnd,
@@ -11,27 +16,35 @@ import { filter } from 'rxjs/operators';
 import { IsLoadingService } from '@service-work/is-loading';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { UserInfoService } from './services/user-info.service';
-import { GREETIGNS } from './consts/routes.consts';
+import { GREETINGS } from './consts/routes.consts';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Titan Surver';
   isLoading$: Observable<boolean>;
   constructor(
     private userInfoService: UserInfoService,
     private qService: QuestionnaireService,
     private isLoadingService: IsLoadingService,
-    private router: Router
+    private router: Router,
+    private coockieService: CookieService,
+    private cd: ChangeDetectorRef
   ) {}
   ngOnInit() {
-    this.router.navigate(['/rating-answer/6']);
+    if (this.coockieService.get('areadyBeenHere')) {
+      console.log('AREADY BEEN HERE');
+    } else {
+      this.coockieService.set('areadyBeenHere', '');
+    }
+    this.router.navigate([GREETINGS]);
+
     this.userInfoService.getUserInfo();
     this.qService.getQuestionnaireByQid('d0819d57-e5d9-44f0-ab42-af03b231aefe');
-
     this.isLoading$ = this.isLoadingService.isLoading$();
 
     this.router.events
@@ -50,9 +63,11 @@ export class AppComponent implements OnInit {
           this.isLoadingService.add();
           return;
         }
-
         // Else navigation has ended, so `remove()` a loading indicator
         this.isLoadingService.remove();
       });
+  }
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 }

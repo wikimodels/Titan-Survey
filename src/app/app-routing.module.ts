@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { COMPLETION, GREETIGNS } from '../app/consts/routes.consts';
+import { COMPLETION, GREETINGS } from '../app/consts/routes.consts';
 import { CompletionComponent } from './completion/completion.component';
 
 import { HomeComponent } from './home/home.component';
@@ -19,7 +19,7 @@ import { GreetingsComponent } from './greetings/greetings.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: `/`,
+    redirectTo: GREETINGS,
     pathMatch: 'full',
   },
   {
@@ -51,7 +51,7 @@ const routes: Routes = [
     component: ImageMultiAnswerComponent,
   },
   {
-    path: GREETIGNS,
+    path: GREETINGS,
     component: GreetingsComponent,
   },
   {

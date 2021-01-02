@@ -48,12 +48,12 @@ export class ImageMultiAnswerComponent implements OnInit, OnDestroy {
           if (this.deviceService.isMobile()) {
             this.gridStyle = 'xs-grid';
             this.columns = 2;
-            this.rowheight = '1:1';
+            this.rowHeight = '1:1';
           } else {
             this.gridStyle = 'xl-grid';
             this.columns = this.question.question_answers.length;
             this.gridWidth = `${this.columns * 200}px`;
-            this.rowheight = '200px';
+            this.rowHeight = '200px';
           }
           this.showBackwardButton =
             this.question.question_id === 1 ? false : true;

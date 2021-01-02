@@ -8,7 +8,7 @@
         {{question.question_text}}
       </div>
       <mat-card-content fxLayout="row" fxLayoutAlign="space-around center" class="content-container">
-        <mat-grid-list [cols]="columns" [rowHeight]="rowheight" [ngClass]="[gridStyle]" [style.width]="gridWidth">
+        <mat-grid-list [cols]="columns" [rowHeight]="rowHeight" [ngClass]="[gridStyle]" [style.width]="gridWidth">
           <mat-grid-tile *ngFor="let answer of question.question_answers" matRipple [matRippleColor]="rippleColor">
             <img [src]="answer.answer_img_url" [id]="answer.answer_id" [alt]="answer.answer_img_alt"
               (click)="choseAnswer(answer.answer_id)" [ngClass]="[answer.answer_clicked_style]">

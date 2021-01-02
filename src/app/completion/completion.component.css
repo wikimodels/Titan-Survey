@@ -1,0 +1,18 @@
+a {
+  text-decoration: none;
+}
+h1,
+h2 {
+  font-weight: 300;
+}
+.mat-button,
+.mat-raised-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+  border-radius: 15px;
+}
+.viber {
+  background-color: #665cac;
+  color: whitesmoke;
+}
