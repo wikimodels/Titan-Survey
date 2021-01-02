@@ -47,6 +47,7 @@ export class TextAnswerComponent implements OnInit {
   }
 
   onSubmit() {
+    window.navigator.vibrate(10);
     const textValue = this.answersForm.value['wishes'];
     console.log(textValue);
     this.question.question_text_answer = this.answersForm.value['wishes'];
@@ -56,6 +57,7 @@ export class TextAnswerComponent implements OnInit {
   }
 
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
 

@@ -52,4 +52,7 @@ export class GreetingsComponent implements OnInit, AfterViewInit {
   loadIframe() {
     this.frame = 'desktop';
   }
+  vibrate() {
+    window.navigator.vibrate(10);
+  }
 }

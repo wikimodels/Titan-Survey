@@ -82,6 +82,7 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    window.navigator.vibrate(10);
     if (
       this.question.question_answers.every(
         (q) => q.answer_boolean_reply === false
@@ -99,6 +100,7 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
   ngOnDestroy() {

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div *ngIf="!show">
-    <button mat-raised-button (click)="startSurvey()">START SURVEY</button>
+    <button mat-raised-button (click)="startSurvey()" (click)="vibrate()">START SURVEY</button>
   </div>
   <!-- <div>
     <iframe [ngClass]="[frame]" [attr.width]="chartWidth" [attr.height]="chartHeight" (load)="loadIframe()"

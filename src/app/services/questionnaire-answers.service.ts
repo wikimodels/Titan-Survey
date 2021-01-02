@@ -4,7 +4,11 @@ import { BehaviorSubject, Observable, throwError, of, from } from 'rxjs';
 import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { GET_USER_INFO_BY_IP, IPIFY_IP } from '../consts/urls.consts';
+import {
+  GET_USER_INFO_BY_IP,
+  IPIFY_IP,
+  SAVE_ANSWERS,
+} from '../consts/urls.consts';
 import { UserInfo } from 'src/models/user-info.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
@@ -17,7 +21,7 @@ const formatDisplayTime = 'HH:mm';
   providedIn: 'root',
 })
 export class QuestionnaireAnswersService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   private _questionnaireAnswersSubj = new BehaviorSubject<Questionnaire>({
     user_info: null,
@@ -54,5 +58,20 @@ export class QuestionnaireAnswersService {
     }
     console.log(questionnaire);
     this.setQuestionnaireSubj(questionnaire);
+  }
+
+  saveAnswersToCloud() {
+    const questionnaire = this.getQuestionnaireSubj();
+    questionnaire.creation_date = Date.now().toString();
+    console.log('Q to Cloud', questionnaire);
+    this.http
+      .post(SAVE_ANSWERS(), questionnaire)
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return of();
+        })
+      )
+      .subscribe();
   }
 }

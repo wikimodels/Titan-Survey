@@ -1,4 +1,10 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -9,12 +15,11 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RatingInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class RatingInputComponent {
-
   @Output() ratingChange = new EventEmitter<number>();
 
   stars: boolean[] = Array(5).fill(false);
@@ -26,7 +31,9 @@ export class RatingInputComponent {
 
   @Input('ratingCount')
   public set setRatingCount(v: number) {
-    if (!v) { return; }
+    if (!v) {
+      return;
+    }
     this.stars = Array(parseInt(v as any)).fill(false);
   }
 
@@ -36,10 +43,10 @@ export class RatingInputComponent {
   // Function to call when the rating changes.
   onChange = (rating: number) => {
     this.ratingChange.emit(rating);
-  }
+  };
 
   // Function to call when the input is touched (when a star is clicked).
-  onTouched = () => { };
+  onTouched = () => {};
 
   get value(): number {
     let val = 0;
@@ -52,24 +59,21 @@ export class RatingInputComponent {
   }
 
   rate(rating: number): void {
-    if (this.disabled) { return; }
+    if (this.disabled) {
+      return;
+    }
     this.writeValue(rating);
   }
-
 
   // Allows Angular to update the model (rating).
   // Update the model and changes needed for the view here.
   writeValue(rating: number): void {
-
     this.stars.forEach((star, index) => {
-
       if (index < rating) {
         this.stars[index] = true;
-      }
-      else {
+      } else {
         this.stars[index] = false;
       }
-
     });
 
     this.onChange(this.value);
@@ -95,5 +99,4 @@ export class RatingInputComponent {
   trackByFn(index: number, item): number {
     return index;
   }
-
 }

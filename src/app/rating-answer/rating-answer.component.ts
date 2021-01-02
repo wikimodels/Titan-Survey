@@ -50,6 +50,7 @@ export class RatingAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    window.navigator.vibrate(10);
     const answerValue = this.answersForm.value['rating'];
     if (answerValue < 1) {
       this.snackbarService.open(
@@ -67,6 +68,7 @@ export class RatingAnswerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
 

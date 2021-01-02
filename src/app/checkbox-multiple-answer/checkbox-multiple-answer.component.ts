@@ -51,7 +51,12 @@ export class CheckboxMultipleAnswerComponent implements OnInit, OnDestroy {
     );
   }
 
+  click() {
+    window.navigator.vibrate(10);
+  }
+
   onSubmit() {
+    window.navigator.vibrate(10);
     console.log('onSubmit formValue', this.answersForm.value);
     const objectValues = Object.values(this.answersForm.value);
     if (objectValues.every((key) => key === false)) {
@@ -72,6 +77,7 @@ export class CheckboxMultipleAnswerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
 

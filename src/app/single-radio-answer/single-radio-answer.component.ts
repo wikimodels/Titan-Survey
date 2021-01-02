@@ -55,8 +55,8 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    window.navigator.vibrate(10);
     const answerId = this.answersForm.value['answer_id'];
-
     if (this.answersForm.value['answer_id'] == -1) {
       this.snackbarService.open(
         'Ответьте, пожалуйста, на вопрос!',
@@ -74,7 +74,11 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
     }
   }
 
+  vibrate() {
+    window.navigator.vibrate(10);
+  }
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
 

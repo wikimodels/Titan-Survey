@@ -69,6 +69,7 @@ export class ImageMultiAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    window.navigator.vibrate(10);
     if (
       this.question.question_answers.every(
         (q) => q.answer_boolean_reply === false
