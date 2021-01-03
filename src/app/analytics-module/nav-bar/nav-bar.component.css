@@ -1,0 +1,56 @@
+.nav-bar {
+  width: 100%;
+  background-color: #1d1e22;
+  color: whitesmoke;
+}
+
+/* ПРИ ПОМОЩИ Z-INDEX'A БАР ДЕРЖИТСЯ НАВЕРХУ, А НЕ ПРЯЧЕТСЯ ПОД СКРОЛЛОМ */
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+}
+
+/* .navbar-controls {
+  justify-content: flex-end;
+}
+
+.logo {
+  padding-top: 3px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 27px;
+  width: 27px;
+}
+
+.small-devices {
+  font-size: 15px;
+  margin-left: 15px;
+}
+
+.other-devices {
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+a {
+  color: whitesmoke;
+}
+a:link {
+  text-decoration: none !important;
+}
+
+a:visited {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+a:active {
+  text-decoration: none !important;
+} */

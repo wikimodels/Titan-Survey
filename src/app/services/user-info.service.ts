@@ -4,8 +4,17 @@ import { BehaviorSubject, Observable, throwError, of, from } from 'rxjs';
 import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import { GET_USER_INFO_BY_IP, IPIFY_IP } from '../consts/urls.consts';
-import { UserInfo } from 'src/models/user-info.model';
+import {
+  GET_ALL_ANSWERED_USERS,
+  GET_ALL_USERS_GROUPED_BY_LOCATION,
+  GET_USER_INFO_BY_IP,
+  IPIFY_IP,
+} from '../consts/urls.consts';
+import {
+  AnsweredGroupedUser,
+  AnsweredUser,
+  UserInfo,
+} from 'src/models/user-info.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { QuestionnaireAnswersService } from './questionnaire-answers.service';
 
@@ -40,10 +49,13 @@ export class UserInfoService {
         switchMap((value) => {
           return this.http.get<UserInfo>(GET_USER_INFO_BY_IP(value));
         }),
-        map((value) => {
+        map((value: UserInfo) => {
           const deviceInfo = this.deviceService.getDeviceInfo();
           console.log('UI', deviceInfo);
-          value.os = deviceInfo.os;
+          value.location = {
+            type: 'Point',
+            coordinates: [value.lon, value.lat],
+          };
           value.os_version = deviceInfo.os_version;
           value.browser = deviceInfo.browser;
           return value;
@@ -52,6 +64,34 @@ export class UserInfoService {
       .subscribe((value: UserInfo) => {
         console.log('USER Info', value);
         this.questionnaireService.addUserInfo(value);
+      });
+  }
+
+  getAllAnsweredUsers() {
+    this.http
+      .get<AnsweredUser[]>(GET_ALL_ANSWERED_USERS())
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return from([]);
+        })
+      )
+      .subscribe((value: AnsweredUser[]) => {
+        console.log('answered users', value);
+      });
+  }
+
+  getAllUsersGroupedByLocation() {
+    this.http
+      .get<AnsweredGroupedUser[]>(GET_ALL_USERS_GROUPED_BY_LOCATION())
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return from([]);
+        })
+      )
+      .subscribe((value: AnsweredUser[]) => {
+        console.log('answered grouped users', value);
       });
   }
 }

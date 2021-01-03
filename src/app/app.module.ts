@@ -26,33 +26,35 @@ import { CheckboxMultipleAnswerComponent } from './checkbox-multiple-answer/chec
 import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
 import { GreetingsComponent } from './greetings/greetings.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AnalyticsModule } from './analytics-module/analytics.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CheckboxMultipleAnswerComponent,
-    SingleRadioAnswerComponent,
     NavBarComponent,
+    GreetingsComponent,
     CompletionComponent,
     TextAnswerComponent,
     RatingAnswerComponent,
-    ImageSingleAnswerComponent,
     QuestionCounterComponent,
-    ButtonSingleAnswerComponent,
     ImageMultiAnswerComponent,
-    GreetingsComponent,
+    SingleRadioAnswerComponent,
+    ImageSingleAnswerComponent,
+    ButtonSingleAnswerComponent,
+    CheckboxMultipleAnswerComponent,
   ],
   imports: [
-    BrowserModule,
     FormsModule,
-    BrowserAnimationsModule,
+    BrowserModule,
+    AnalyticsModule,
     AppRoutingModule,
     HttpClientModule,
-    AppMaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule,
     RatingInputModule,
+    AppMaterialModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [SnackBarService, CookieService],
   bootstrap: [AppComponent],

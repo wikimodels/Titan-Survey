@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { COMPLETION, GREETINGS } from '../app/consts/routes.consts';
+import { ANALYTICS, COMPLETION, GREETINGS } from '../app/consts/routes.consts';
 import { CompletionComponent } from './completion/completion.component';
 
 import { HomeComponent } from './home/home.component';
@@ -53,6 +53,13 @@ const routes: Routes = [
   {
     path: GREETINGS,
     component: GreetingsComponent,
+  },
+  {
+    path: ANALYTICS,
+    loadChildren: () =>
+      import('./analytics-module/analytics.module').then(
+        (m) => m.AnalyticsModule
+      ),
   },
   {
     path: COMPLETION,
