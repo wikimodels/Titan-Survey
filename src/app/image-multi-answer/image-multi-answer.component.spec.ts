@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ImageMultiAnswerComponent } from './image-multi-answer.component';
 
@@ -6,7 +6,7 @@ describe('ImageMultiAnswerComponent', () => {
   let component: ImageMultiAnswerComponent;
   let fixture: ComponentFixture<ImageMultiAnswerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ImageMultiAnswerComponent ]
     })

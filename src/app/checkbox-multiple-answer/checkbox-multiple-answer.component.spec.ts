@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultipleAnswerCardComponent } from './checkbox-multiple-answer.component';
 
@@ -6,7 +6,7 @@ describe('MultipleAnswerCardComponent', () => {
   let component: MultipleAnswerCardComponent;
   let fixture: ComponentFixture<MultipleAnswerCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MultipleAnswerCardComponent],
     }).compileComponents();
