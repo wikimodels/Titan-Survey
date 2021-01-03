@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ANALYTICS, USERS } from 'src/app/consts/routes.consts';
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'app-analytics-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
