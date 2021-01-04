@@ -15,6 +15,7 @@ import { ImageMultiAnswerComponent } from './image-multi-answer/image-multi-answ
 import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
 import { QuestionType } from 'src/models/questionnaire.model';
 import { GreetingsComponent } from './greetings/greetings.component';
+import { SpecialImageMultiAnswerComponent } from './special-image-multi-answer/special-image-multi-answer.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: QuestionType.IMAGE_MULTI_ANSWER + '/:question_id',
     component: ImageMultiAnswerComponent,
+  },
+  {
+    path: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER + '/:question_id',
+    component: SpecialImageMultiAnswerComponent,
   },
   {
     path: GREETINGS,

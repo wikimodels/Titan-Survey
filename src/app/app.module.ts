@@ -27,6 +27,7 @@ import { ButtonSingleAnswerComponent } from './button-single-answer/button-singl
 import { GreetingsComponent } from './greetings/greetings.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AnalyticsModule } from './analytics-module/analytics.module';
+import { SpecialImageMultiAnswerComponent } from './special-image-multi-answer/special-image-multi-answer.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AnalyticsModule } from './analytics-module/analytics.module';
     ImageSingleAnswerComponent,
     ButtonSingleAnswerComponent,
     CheckboxMultipleAnswerComponent,
+    SpecialImageMultiAnswerComponent,
   ],
   imports: [
     FormsModule,

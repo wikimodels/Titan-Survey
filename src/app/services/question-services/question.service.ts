@@ -51,6 +51,18 @@ export class QuestionService {
     return question;
   }
 
+  setSpecialChosenMultiAnswer(answerId: number, question: Question) {
+    if (answerId === 0) {
+      question = this.setAllAnswersToFalse(question);
+      question = this.setChosenMultiAnswer(answerId, question);
+      return question;
+    } else {
+      question.question_answers[0].answer_boolean_reply = false;
+      question = this.setChosenMultiAnswer(answerId, question);
+    }
+    return question;
+  }
+
   setNextQuestionUrl(question: Question, questions: Question[]): Question {
     let url: string;
 
@@ -100,6 +112,7 @@ export class QuestionService {
       if (
         q.question_type === QuestionType.IMAGE_SINGLE_ANSWER ||
         q.question_type === QuestionType.IMAGE_MULTI_ANSWER ||
+        q.question_type === QuestionType.SPECIAL_IMAGE_MULTI_ANSWER ||
         q.question_type === QuestionType.BUTTON_SINGLE_ANSWER ||
         q.question_type === QuestionType.BUTTON_MULTI_ANSWER
       ) {
@@ -135,6 +148,9 @@ export class QuestionService {
         break;
       case QuestionType.IMAGE_MULTI_ANSWER:
         url = QuestionType.IMAGE_MULTI_ANSWER;
+        break;
+      case QuestionType.SPECIAL_IMAGE_MULTI_ANSWER:
+        url = QuestionType.SPECIAL_IMAGE_MULTI_ANSWER;
         break;
     }
     return url;

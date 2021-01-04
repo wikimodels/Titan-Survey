@@ -10,7 +10,7 @@ export function getTestQuestionnaire() {
     questions: [
       {
         question_id: 1,
-        question_type: QuestionType.IMAGE_MULTI_ANSWER,
+        question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
         question_text:
           'Как часто Вас беспокоят боли из-за проблем с позвоночником (протрузии, грыжи и т.д.)?',
         question_answers: [

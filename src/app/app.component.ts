@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     } else {
       this.coockieService.set('areadyBeenHere', '');
     }
-    //this.router.navigate([GREETINGS]);
+    this.router.navigate([GREETINGS]);
 
     this.userInfoService.getUserInfo();
     this.qService.getQuestionnaireByQid('d0819d57-e5d9-44f0-ab42-af03b231aefe');

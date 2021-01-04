@@ -40,5 +40,6 @@ export enum QuestionType {
   RATING_ANSWER = 'rating-answer',
   IMAGE_SINGLE_ANSWER = 'image-single-answer',
   IMAGE_MULTI_ANSWER = 'image-multi-answer',
+  SPECIAL_IMAGE_MULTI_ANSWER = 'special-image-multi-answer',
   BUTTON_MULTI_ANSWER = 'button-mutli-answer',
 }
