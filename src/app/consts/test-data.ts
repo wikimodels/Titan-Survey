@@ -127,11 +127,16 @@ export function getTestQuestionnaire() {
           },
           {
             answer_id: 2,
-            answer_text: 'Хочу, но дорого',
+            answer_text: 'Да, когда есть деньги',
             answer_boolean_reply: false,
           },
           {
             answer_id: 3,
+            answer_text: 'Хочу, но дорого',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 4,
             answer_text: 'Нет, нет необходимости',
             answer_boolean_reply: false,
           },
@@ -231,7 +236,7 @@ export function getTestQuestionnaire() {
         question_id: 9,
         question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
         question_text:
-          'В каких частях позвоночника Вы испытываете проблемы (зелёный цвет - проблем нет)?',
+          'В каких частях позвоночника Вы испытываете проблемы (выберите один ответ или несколько; зелёный цвет - проблем нет)?',
         question_answers: [
           {
             answer_id: 0,
@@ -268,7 +273,7 @@ export function getTestQuestionnaire() {
         question_id: 10,
         question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
         question_text:
-          'Проблемы в каких суставах Вас сейчас беспокоят (зелёный цвет - ничего из этого не беспокоит)?',
+          'Проблемы в каких суставах Вас сейчас беспокоят (выберите один ответ или несколько; зелёный цвет - это не беспокоит)?',
         question_answers: [
           {
             answer_id: 0,
@@ -434,11 +439,6 @@ export function getTestQuestionnaire() {
             answer_boolean_reply: false,
           },
           {
-            answer_id: 2,
-            answer_text: 'Нет, мне это не надо',
-            answer_boolean_reply: false,
-          },
-          {
             answer_id: 3,
             answer_text: 'Сперва хочу узнать об этом больше',
             answer_boolean_reply: false,
@@ -454,19 +454,26 @@ export function getTestQuestionnaire() {
         question_answers: [
           {
             answer_id: 0,
-            answer_text: 'Да',
-            answer_boolean_reply: false,
-            answer_img_url: './assets/images/yes1.jpg',
-            answer_img_alt: 'Да',
-          },
-          {
-            answer_id: 1,
             answer_text: 'Мне всё равно',
             answer_boolean_reply: false,
             answer_img_url: './assets/images/dont-care.jpg',
             answer_img_alt: 'Мне всё равно',
           },
+          {
+            answer_id: 1,
+            answer_text: 'Да',
+            answer_boolean_reply: false,
+            answer_img_url: './assets/images/yes1.jpg',
+            answer_img_alt: 'Да',
+          },
         ],
+      },
+
+      {
+        question_id: 17,
+        question_type: QuestionType.TEXT,
+        question_text: 'Что бы Вы хотели добавить от себя?',
+        question_text_answer: '',
       },
     ],
   };

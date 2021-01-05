@@ -1,7 +1,8 @@
 .greetings-container {
   width: 100vw;
-  height: 80vh;
-  background-color: whitesmoke;
+  height: 100vh;
+  background-color: #ffffff;
+  animation: fadeIn 0.5s ease-in;
 }
 .mobile {
   background: #ffffff;
@@ -30,8 +31,22 @@ h2 {
   border-radius: 15px;
 }
 .mat-raised-button {
-  line-height: 45px;
+  line-height: 40px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 300;
+}
+.titan {
+  color: white;
+  background-color: #ff9933;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    /* background-color: gainsboro; */
+  }
+  to {
+    opacity: 1;
+    /* background-color: #ffffff; */
+  }
 }

@@ -34,14 +34,24 @@
       caches
         .match(event.request, { ignoreSearch: true })
         .then(function (response) {
-          if (response && response.url.includes("images")) {
-            console.log("response from cache", response.url);
-          }
-          console.log("==!response from cache", response);
-
           if (response) {
+            console.log("RESPONSE from CACHE", response);
             return response;
           }
+          var requestToCache = event.request.clone();
+          return fetch(requestToCache).then(function (response) {
+            if (!response || response.status !== 200) {
+              return response;
+            }
+            var responseToCache = response.clone();
+            caches.open(cacheName).then(function (cache) {
+              console.log("REQUEST to CACHE", requestToCache);
+              if (requestToCache["method"] != "POST") {
+                cache.put(requestToCache, responseToCache);
+              }
+            });
+            return response;
+          });
         })
     );
   });
