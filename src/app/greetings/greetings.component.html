@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div fxLayout="column" fxLayoutAlign="center center" class="greetings-container">
-  <div style="width: 90vw; height: 90vh; text-align: center;">
-    <div style="width: 90vw; margin-top: 60px;">
+  <div class="greetings-inner-container">
+    <div class="greetings-message">
       <h1>Привет!</h1>
       <h2>Нам нужна Ваша помощь!</h2>
       <h2>Мы хотим сделать наш спортклуб лучше! Поэтому нам необходимо узнать Ваше мнение по нескольким важным для нас
         вопросам!</h2>
-      <h2>Это займёт максимум 4 минуты!</h2>
+      <h2>Это займёт максимум 3 минуты!</h2>
       <div *ngIf="!show" style="margin-bottom: 40px; margin-top:30px">
         <h1><a mat-raised-button (click)="startSurvey()" class="titan"><span>Начать
               Опрос</span></a></h1>

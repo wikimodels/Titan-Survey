@@ -202,7 +202,7 @@ export function getTestQuestionnaire() {
         question_id: 8,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
-          'Какую сумму Вам приходится тратить ежемесячно на решение проблем со здоровьем?',
+          'Какую сумму Вам приходится тратить ежемесячно на восстановление здоровьем (лекарства, физиотерапия и т.д.)?',
         question_answers: [
           {
             answer_id: 0,
@@ -236,7 +236,7 @@ export function getTestQuestionnaire() {
         question_id: 9,
         question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
         question_text:
-          'В каких частях позвоночника Вы испытываете проблемы (выберите один ответ или несколько; зелёный цвет - проблем нет)?',
+          'В каких частях позвоночника Вы испытываете проблемы (выберите один или несколько ответов; зелёный цвет - проблем нет)?',
         question_answers: [
           {
             answer_id: 0,
@@ -273,7 +273,7 @@ export function getTestQuestionnaire() {
         question_id: 10,
         question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
         question_text:
-          'Проблемы в каких суставах Вас сейчас беспокоят (выберите один ответ или несколько; зелёный цвет - это не беспокоит)?',
+          'Проблемы в каких суставах Вас обычно беспокоят (выберите один или несколько ответов; зелёный цвет - не беспокоит)?',
         question_answers: [
           {
             answer_id: 0,
@@ -322,7 +322,7 @@ export function getTestQuestionnaire() {
           },
           {
             answer_id: 2,
-            answer_text: 'Болит после больших нагрузок',
+            answer_text: 'Болит после разных нагрузок',
             answer_boolean_reply: false,
           },
           {
@@ -336,7 +336,7 @@ export function getTestQuestionnaire() {
         question_id: 12,
         question_type: QuestionType.RATING_ANSWER,
         question_text:
-          'Как бы Вы оценили эффективность помощи специалистов по вопросам здоровья (врачи, массажисты и т.д.), исходя из Вашего личного опыта и опыта Ваших знакомых?',
+          'Как Вы оцениваете эффективность помощи специалистов по вопросам здоровья (врачи, массажисты и т.д.), исходя из Вашего личного опыта и опыта Ваших знакомых?',
         question_answers: [
           {
             answer_id: 0,
@@ -367,9 +367,45 @@ export function getTestQuestionnaire() {
       },
       {
         question_id: 13,
+        question_type: QuestionType.SPECIAL_IMAGE_MULTI_ANSWER,
+        question_text:
+          'Какие виды искривления осанки Вы видите у окружающих, особенно, у подростков (выберете один или несколько ответов)?',
+        question_answers: [
+          {
+            answer_id: 0,
+            answer_text: 'Не обращаю не это внимания',
+            answer_boolean_reply: false,
+            answer_img_url: './assets/images/spine-ok.jpg',
+            answer_img_alt: 'Не обращаю на это внимания',
+          },
+          {
+            answer_id: 1,
+            answer_text: 'Сколиоз',
+            answer_boolean_reply: false,
+            answer_img_url: './assets/images/spine-scoliosis.jpg',
+            answer_img_alt: 'Сколиоз',
+          },
+          {
+            answer_id: 2,
+            answer_text: 'Кифоз',
+            answer_boolean_reply: false,
+            answer_img_url: './assets/images/spine-kyphosis.jpg',
+            answer_img_alt: 'Кифоз',
+          },
+          {
+            answer_id: 3,
+            answer_text: 'Лордоз',
+            answer_boolean_reply: false,
+            answer_img_url: './assets/images/spine-lordosis.jpg',
+            answer_img_alt: 'Лордоз',
+          },
+        ],
+      },
+      {
+        question_id: 14,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
-          'Знаете ли Вы какие-либо упражнения для профилактики заболеваний позвоночника ( грыжи/протрузии и т.д.)?',
+          'Знаете ли Вы какие-либо упражнения для профилактики заболеваний позвоночника (грыжи/протрузии и т.д.)?',
         question_answers: [
           {
             answer_id: 0,
@@ -394,7 +430,7 @@ export function getTestQuestionnaire() {
         ],
       },
       {
-        question_id: 14,
+        question_id: 15,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
           'Смогли бы Вы рассказать другому человеку о роли питания в поддержании здорового позвоночника и суставов?',
@@ -411,14 +447,14 @@ export function getTestQuestionnaire() {
           },
           {
             answer_id: 2,
-            answer_text: 'Не уверен(а)',
+            answer_text: 'Мало разбираюсь в этом',
             answer_boolean_reply: false,
           },
         ],
       },
 
       {
-        question_id: 15,
+        question_id: 16,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
           'Хотели бы Вы включить в Ваш комплекс упражнения на специальных тренажёрах для профилактики заболеваний суставов и позвоночника?',
@@ -440,14 +476,47 @@ export function getTestQuestionnaire() {
           },
           {
             answer_id: 3,
-            answer_text: 'Сперва хочу узнать об этом больше',
+            answer_text: 'Хочу узнать об этом больше',
             answer_boolean_reply: false,
           },
         ],
       },
 
       {
-        question_id: 16,
+        question_id: 17,
+        question_type: QuestionType.CHECKBOX_MULTIPLE_ANSWER,
+        question_text:
+          'Что должно быть, на Ваш взгляд, в комнате лечебной физкультуры помимо специализированных тренажёров?',
+        question_answers: [
+          {
+            answer_id: 0,
+            answer_text: 'Bозможность для медитации',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 1,
+            answer_text: 'Успокаивающая музыка',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 2,
+            answer_text: 'Ароматерапия',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 3,
+            answer_text: 'Целебные чаи',
+            answer_boolean_reply: false,
+          },
+          {
+            answer_id: 4,
+            answer_text: 'другое (напишу в заключении)',
+            answer_boolean_reply: false,
+          },
+        ],
+      },
+      {
+        question_id: 18,
         question_type: QuestionType.IMAGE_SINGLE_ANSWER,
         question_text:
           'Хотели бы Вы, чтобы в Вашем спортклубе работал тренер, разбирающийся в вопросах восстановления суставов и позвоночника?',
@@ -470,9 +539,9 @@ export function getTestQuestionnaire() {
       },
 
       {
-        question_id: 17,
+        question_id: 19,
         question_type: QuestionType.TEXT,
-        question_text: 'Что бы Вы хотели добавить от себя?',
+        question_text: 'Что бы Вы хотели пожелать/добавить от себя?',
         question_text_answer: '',
       },
     ],

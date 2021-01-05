@@ -1,6 +1,18 @@
 (function () {
-  const cacheName = "images";
+  const cacheName = "titan-v3";
   self.addEventListener("install", (event) => {
+    event.waitUntil(
+      caches.keys().then(function (keyList) {
+        return Promise.all(
+          keyList.map(function (key) {
+            if (key !== cacheName) {
+              console.log("[ServiceWorker] Removing old cache", key);
+              return caches.delete(key);
+            }
+          })
+        );
+      })
+    );
     event.waitUntil(
       caches
         .open(cacheName)
@@ -24,6 +36,10 @@
             "./assets/images/activity-pumping.jpg",
             "./assets/images/yes1.jpg",
             "./assets/images/dont-care.jpg",
+            "./assets/images/spine-kyphosis.jpg",
+            "./assets/images/spine-lordosis.jpg",
+            "./assets/images/spine-scoliosis.jpg",
+            "./assets/images/spine-ok.jpg",
           ])
         )
     );
@@ -44,12 +60,14 @@
               return response;
             }
             var responseToCache = response.clone();
+
             caches.open(cacheName).then(function (cache) {
               console.log("REQUEST to CACHE", requestToCache);
-              if (requestToCache["method"] != "POST") {
+              if (!responseToCache.url.includes("webhooks")) {
                 cache.put(requestToCache, responseToCache);
               }
             });
+
             return response;
           });
         })

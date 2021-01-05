@@ -91,8 +91,18 @@ body {
   .stars-container {
     width: 90vw !important;
   }
+  .greetings-inner-container {
+    width: 90vw;
+    height: 90vh;
+    text-align: center;
+  }
+  .greetings-message {
+    width: 90vw;
+    margin-top: 60px;
+  }
 }
 
+/* FOR IPHONE S5 */
 @media screen and (max-width: 320px) {
   .button-question {
     width: 85vw !important;
@@ -180,6 +190,16 @@ body {
   }
   .content-container {
     width: 100%;
+  }
+  .greetings-inner-container {
+    width: 90vw;
+    height: 90vh;
+    text-align: center;
+  }
+  .greetings-message {
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 60px;
   }
 }
 

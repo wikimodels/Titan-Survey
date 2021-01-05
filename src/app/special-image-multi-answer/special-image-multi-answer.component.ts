@@ -86,6 +86,7 @@ export class SpecialImageMultiAnswerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
+    window.navigator.vibrate(10);
     this.router.navigate([this.question.previous_question_url]);
   }
 
