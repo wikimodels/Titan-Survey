@@ -42,6 +42,7 @@ export class GreetingsComponent implements OnInit, AfterViewInit {
     }
   }
   startSurvey() {
+    window.navigator.vibrate(10);
     const url = this.questionnaireService.getFirstQuestionUrl();
     console.log('IsMobile', this.deviceService.isMobile());
     this.router.navigate([url]);
@@ -51,8 +52,5 @@ export class GreetingsComponent implements OnInit, AfterViewInit {
 
   loadIframe() {
     this.frame = 'desktop';
-  }
-  vibrate() {
-    window.navigator.vibrate(10);
   }
 }

@@ -1,6 +1,7 @@
 .greetings-container {
   width: 100vw;
   height: 80vh;
+  background-color: whitesmoke;
 }
 .mobile {
   background: #ffffff;
@@ -12,4 +13,25 @@
   border: none;
   border-radius: 2px;
   box-shadow: 0 2px 10px 0 rgba(70, 76, 79, 0.452);
+}
+
+a {
+  text-decoration: none;
+}
+h1,
+h2 {
+  font-weight: 300;
+}
+.mat-button,
+.mat-raised-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+  border-radius: 15px;
+}
+.mat-raised-button {
+  line-height: 45px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
 }

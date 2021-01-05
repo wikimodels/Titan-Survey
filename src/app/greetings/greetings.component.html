@@ -1,11 +1,17 @@
 <app-nav-bar></app-nav-bar>
-<div class="greetings-container" fxLayout="column" fxLayoutAlign="space-around center">
-  <div *ngIf="show">
-    <div>
-      <h1>Just a monent!</h1>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div style="width: 90vw; height: 90vh; text-align: center;">
+    <div style="width: 90vw; margin-top: 60px;">
+      <h1>Привет!</h1>
+      <h2>Нам нужна Ваша помощь!</h2>
+      <h2>Мы хотим сделать наш спортклуб лучше! Поэтому нам необходимо узнать Ваше мнение по нескольким важным для нас
+        вопросам!</h2>
+      <h2>Это займёт максимум 4 минуты!</h2>
+      <div *ngIf="!show" style="margin-bottom: 40px; margin-top:30px">
+        <h1><a mat-raised-button (click)="startSurvey()"><span>Начать
+              Опрос</span></a></h1>
+
+        <h2>Благодарим за Вашу помощь!</h2>
+      </div>
     </div>
   </div>
-  <div *ngIf="!show">
-    <button mat-raised-button (click)="startSurvey()" (click)="vibrate()">START SURVEY</button>
-  </div>
-</div>
