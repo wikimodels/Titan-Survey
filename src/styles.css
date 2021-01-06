@@ -98,7 +98,7 @@ body {
   }
   .greetings-message {
     width: 90vw;
-    margin-top: 60px;
+    margin-top: 40px;
   }
 }
 
@@ -190,6 +190,13 @@ body {
   }
   .content-container {
     width: 100%;
+  }
+
+  .greetings-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    animation: fadeIn 0.5s ease-in;
   }
   .greetings-inner-container {
     width: 90vw;

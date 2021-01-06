@@ -1,5 +1,5 @@
 (function () {
-  const cacheName = "titan-v3";
+  const cacheName = "titan-v2";
   self.addEventListener("install", (event) => {
     event.waitUntil(
       caches.keys().then(function (keyList) {
@@ -62,9 +62,12 @@
             var responseToCache = response.clone();
 
             caches.open(cacheName).then(function (cache) {
-              console.log("REQUEST to CACHE", requestToCache);
-              if (!responseToCache.url.includes("webhooks")) {
-                cache.put(requestToCache, responseToCache);
+              if (
+                requestToCache.method === "GET" &&
+                !requestToCache.url.includes("webhooks")
+              ) {
+                console.log("PUT TO CACHE", requestToCache.url);
+                //cache.put(requestToCache, responseToCache);
               }
             });
 

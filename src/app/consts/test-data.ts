@@ -64,7 +64,7 @@ export function getTestQuestionnaire() {
       {
         question_id: 3,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
-        question_text: 'Каков Ваш стаж занятий физкультурой/спортом?',
+        question_text: 'Каков стаж Ваших занятий физкультурой/спортом?',
         question_answers: [
           {
             answer_id: 0,
@@ -202,31 +202,31 @@ export function getTestQuestionnaire() {
         question_id: 8,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
-          'Какую сумму Вам приходится тратить ежемесячно на восстановление здоровьем (лекарства, физиотерапия и т.д.)?',
+          'Какую сумму Вы тратите ежемесячно на лечение "болячек" (лекарства, физиотерапия и т.д.)?',
         question_answers: [
           {
             answer_id: 0,
-            answer_text: 'до 20 рублей',
+            answer_text: 'На это не трачусь',
             answer_boolean_reply: false,
           },
           {
             answer_id: 1,
-            answer_text: 'до 50 рублей',
+            answer_text: 'до 20 рублей',
             answer_boolean_reply: false,
           },
           {
             answer_id: 2,
-            answer_text: 'до 70 рублей',
+            answer_text: 'до 50 рублей',
             answer_boolean_reply: false,
           },
           {
             answer_id: 3,
-            answer_text: 'до 100 рублей и выше',
+            answer_text: 'до 70 рублей',
             answer_boolean_reply: false,
           },
           {
             answer_id: 4,
-            answer_text: 'На это не трачусь',
+            answer_text: 'до 100 рублей и выше',
             answer_boolean_reply: false,
           },
         ],
@@ -433,7 +433,7 @@ export function getTestQuestionnaire() {
         question_id: 15,
         question_type: QuestionType.BUTTON_SINGLE_ANSWER,
         question_text:
-          'Смогли бы Вы рассказать другому человеку о роли питания в поддержании здорового позвоночника и суставов?',
+          'Смогли бы Вы рассказать другому человеку о роли питания в поддержании здоровья позвоночника и суставов?',
         question_answers: [
           {
             answer_id: 0,
@@ -519,7 +519,7 @@ export function getTestQuestionnaire() {
         question_id: 18,
         question_type: QuestionType.IMAGE_SINGLE_ANSWER,
         question_text:
-          'Хотели бы Вы, чтобы в Вашем спортклубе работал тренер, разбирающийся в вопросах восстановления суставов и позвоночника?',
+          'Хотели бы Вы, чтобы в Вашем спортклубе работал тренер, хорошо разбирающийся в вопросах восстановления суставов и позвоночника?',
         question_answers: [
           {
             answer_id: 0,

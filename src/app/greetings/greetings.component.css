@@ -1,9 +1,3 @@
-.greetings-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffffff;
-  animation: fadeIn 0.5s ease-in;
-}
 .mobile {
   background: #ffffff;
   border: none;
