@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 import { ButtonSingleAnswerService } from '../services/question-services/button-single-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { SnackBarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-single-button-answer',
@@ -23,7 +23,7 @@ export class ButtonSingleAnswerComponent implements OnInit, OnDestroy {
     private questionnaireService: QuestionnaireService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private questionnaireAnswersService: QuestionnaireAnswersService,
     private bsaService: ButtonSingleAnswerService
   ) {
@@ -61,7 +61,6 @@ export class ButtonSingleAnswerComponent implements OnInit, OnDestroy {
     ) {
       this.snackbarService.open(
         'Пожалуйста, выберите ответ на вопрос',
-        'x',
         MessageType.WARNING
       );
     } else {

@@ -1,28 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError, of, from } from 'rxjs';
-import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
-import * as moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map, tap, switchMap } from 'rxjs/operators';
 import {
   UPLOAD_TEST_QUESTIONNAIRE,
   GET_TEST_QUESTIONNAIRE,
   GET_QUESTIONNAIRE_BY_QID,
 } from '../consts/urls.consts';
-import { UserInfo } from 'src/models/user-info.model';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import {
-  Question,
-  Questionnaire,
-  QuestionType,
-} from 'src/models/questionnaire.model';
-import { UserInfoService } from './user-info.service';
+import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { getTestQuestionnaire } from '../consts/test-data';
 import { QuestionService } from './question-services/question.service';
 import { IsLoadingService } from '@service-work/is-loading';
-
-const formatDisplayDate = 'DD-MM-YY';
-const formatDisplayTime = 'HH:mm';
+import { SlackService } from './shared/slack.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +20,8 @@ export class QuestionnaireService {
   constructor(
     private http: HttpClient,
     private qService: QuestionService,
-    private isLoadingService: IsLoadingService
+    private isLoadingService: IsLoadingService,
+    private slackService: SlackService
   ) {}
 
   private _questionnaireSubj = new BehaviorSubject<Questionnaire>({
@@ -40,7 +30,6 @@ export class QuestionnaireService {
     questions: [],
     creation_date: null,
     modification_date: null,
-    //questions_total_number: 0,
   });
   questionnaireSubj$ = this._questionnaireSubj.asObservable();
 
@@ -96,10 +85,7 @@ export class QuestionnaireService {
         tap(() => {
           this.isLoadingService.remove();
         }),
-        catchError((error) => {
-          console.log(error);
-          return throwError(error);
-        })
+        catchError((error) => this.slackService.errorHandling(error))
       )
       .subscribe((questionnaire: Questionnaire) => {
         console.log('Questionnaire from Cloud', questionnaire);

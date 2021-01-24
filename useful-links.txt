@@ -9,9 +9,27 @@ https://gitlab.com/service-work/is-loading
 list of ip-checkers
 https://coderoad.ru/391979/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%B0%D0%B4%D1%80%D0%B5%D1%81-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%B0-IP-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-JavaScript
 
+Adding open-graph meta-tags dynamically
+https://medium.com/@baunov/dynamic-meta-tags-for-angular-app-part-1-dc5957af202c
 
+Good pic from back
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fak.picdn.net%2Fshutterstock%2Fvideos%2F12823928%2Fthumb%2F4.jpg&imgrefurl=https%3A%2F%2Fimageric.com%2Fvideos%2Fpremium%2Fdetail%2F12951614&tbnid=gc1DQxW3V2qBUM&vet=12ahUKEwjR-La3m4fuAhVHlosKHesEALoQMygtegUIARD-AQ..i&docid=9BuJ4a8Ug9hQNM&w=852&h=480&itg=1&q=spine%20full%20hd&client=opera&ved=2ahUKEwjR-La3m4fuAhVHlosKHesEALoQMygtegUIARD-AQ
 
-
+db.collection.aggregate([
+  { "$project": {
+    "difference": {
+      "$divide": [
+        { "$subtract": ["$logoutTime", "$loginTime"] },
+        60 * 1000 * 60
+      ]
+    }
+  }},
+  { "$group": {
+    "_id": "$studentID",
+    "totalDifference": { "$sum": "$difference" }
+  }},
+  { "$match": { "totalDifference": { "$gte": 20 }}}
+])
 
 
 

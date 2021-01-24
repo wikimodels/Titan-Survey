@@ -6,21 +6,22 @@ import {
   MatSnackBarRef,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { MessageType } from 'src/models/message-types.model';
+import { BasicSnackbarComponent } from 'src/app/basic-snackbar/basic-snackbar.component';
+import { MessageType } from './models/message-type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SnackBarService {
+export class BasicSnackbarService {
   //create an instance of MatSnackBar
-  snackBarConfig: MatSnackBarConfig;
   snackBarRef: MatSnackBarRef<any>;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  snackBarAutoHide = '3000';
+  private snackBarConfig: MatSnackBarConfig;
+  private horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  private verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private snackBarAutoHide = '3000';
   constructor(private snackBar: MatSnackBar) {}
 
-  open(message: string, action: string, type: MessageType) {
+  open(message: string, type: MessageType) {
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.horizontalPosition = this.horizontalPosition;
     this.snackBarConfig.verticalPosition = this.verticalPosition;
@@ -28,6 +29,11 @@ export class SnackBarService {
     const sbClass =
       type === MessageType.INFO ? 'info-snackbar' : 'warning-snackbar';
     this.snackBarConfig.panelClass = sbClass;
-    this.snackBar.open(message, action, this.snackBarConfig);
+    this.snackBarConfig.data = message;
+
+    this.snackBar.openFromComponent(
+      BasicSnackbarComponent,
+      this.snackBarConfig
+    );
   }
 }

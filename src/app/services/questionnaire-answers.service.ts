@@ -1,34 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError, of, from } from 'rxjs';
-import { catchError, map, tap, finalize, switchMap } from 'rxjs/operators';
-import * as moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
-import {
-  GET_USER_INFO_BY_IP,
-  IPIFY_IP,
-  SAVE_ANSWERS,
-} from '../consts/urls.consts';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { SAVE_ANSWERS } from '../consts/urls.consts';
 import { UserInfo } from 'src/models/user-info.model';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
-import { UserInfoService } from './user-info.service';
-
-const formatDisplayDate = 'DD-MM-YY';
-const formatDisplayTime = 'HH:mm';
+import { SlackService } from './shared/slack.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionnaireAnswersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private slackService: SlackService) {}
 
   private _questionnaireAnswersSubj = new BehaviorSubject<Questionnaire>({
     user_info: null,
     questions: [],
     creation_date: null,
     modification_date: null,
-    //questions_total_number: 0,
   });
   questionnaireAnswersSubj$ = this._questionnaireAnswersSubj.asObservable();
 
@@ -66,12 +55,7 @@ export class QuestionnaireAnswersService {
     console.log('Q to Cloud', questionnaire);
     this.http
       .post(SAVE_ANSWERS(), questionnaire)
-      .pipe(
-        catchError((error) => {
-          console.log(error);
-          return of();
-        })
-      )
+      .pipe(catchError((error) => this.slackService.errorHandling(error)))
       .subscribe();
   }
 }

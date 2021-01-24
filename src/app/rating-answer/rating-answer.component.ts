@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 import { RatingSingleAnswerService } from '../services/question-services/rating-single-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { SnackBarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-rating-answer',
@@ -25,7 +25,7 @@ export class RatingAnswerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService,
     private ratingService: RatingSingleAnswerService
   ) {}
@@ -55,7 +55,6 @@ export class RatingAnswerComponent implements OnInit, OnDestroy {
     if (answerValue < 1) {
       this.snackbarService.open(
         'Пожалуйста, ответься на вопрос!',
-        'x',
         MessageType.WARNING
       );
     } else {

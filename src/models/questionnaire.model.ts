@@ -6,6 +6,7 @@ export interface Questionnaire {
   user_info?: UserInfo;
   questions?: Question[];
   creation_date?: string;
+  submission_date?: string;
   modification_date?: string;
   first_question_url?: string;
 }

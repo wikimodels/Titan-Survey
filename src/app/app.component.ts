@@ -71,3 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
   }
 }
+//TODO:replace snackbar functionality with new module
+//TODO:replace questionnaire with new version
+//TODO:put viber link
+//TODO:put slack logging functionality

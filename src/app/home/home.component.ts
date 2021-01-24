@@ -16,5 +16,7 @@ import { QuestionType } from 'src/models/questionnaire.model';
 })
 export class HomeComponent implements OnInit {
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(navigator.userAgent);
+  }
 }

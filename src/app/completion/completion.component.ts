@@ -7,7 +7,7 @@ import { QuestionnaireAnswersService } from '../services/questionnaire-answers.s
   styleUrls: ['./completion.component.css'],
 })
 export class CompletionComponent implements OnInit {
-  viber_group = ''; //GET_VIBER_GROUP();
+  viber_group = GET_VIBER_GROUP();
   constructor(private qAnswers: QuestionnaireAnswersService) {}
 
   ngOnInit(): void {

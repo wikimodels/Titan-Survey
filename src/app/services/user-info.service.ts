@@ -17,9 +17,12 @@ import {
 } from 'src/models/user-info.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { QuestionnaireAnswersService } from './questionnaire-answers.service';
+import { SlackService } from './shared/slack.service';
 
-//import { findIP, addIP } from '../../assets/scripts/ip';
-
+//TODO:prevent backward browser button
+//TODO:check if you user has already answered the questionnaire
+//TODO:make sure that the correct version of SW and SW'cache is loaded
+//TODO:clean up the mess
 const formatDisplayDate = 'DD-MM-YY';
 const formatDisplayTime = 'HH:mm';
 declare global {
@@ -27,7 +30,7 @@ declare global {
     ActiveXObject: any;
   }
 }
-declare var ActiveXObject: (type: string) => void;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -35,7 +38,8 @@ export class UserInfoService {
   constructor(
     private readonly http: HttpClient,
     private deviceService: DeviceDetectorService,
-    private questionnaireService: QuestionnaireAnswersService
+    private questionnaireService: QuestionnaireAnswersService,
+    private slackService: SlackService
   ) {}
 
   getUserInfo() {
@@ -56,10 +60,12 @@ export class UserInfoService {
             type: 'Point',
             coordinates: [value.lon, value.lat],
           };
+          value.os = deviceInfo.os;
           value.os_version = deviceInfo.os_version;
           value.browser = deviceInfo.browser;
           return value;
-        })
+        }),
+        catchError((error) => this.slackService.errorHandling(error))
       )
       .subscribe((value: UserInfo) => {
         console.log('USER Info', value);

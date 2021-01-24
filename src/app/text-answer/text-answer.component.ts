@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
-import { RadioSingleAnswerService } from '../services/question-services/radio-single-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { SnackBarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-text-answer',

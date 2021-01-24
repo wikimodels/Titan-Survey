@@ -11,8 +11,6 @@ export class CheckboxMultiAnswerService {
   getFormControlsForAnswers(question: Question) {
     const formControls = {};
     question.question_answers.forEach((answer) => {
-      console.log('answer', answer);
-      console.log('answer id', answer['answer_id']);
       formControls[answer['answer_id']] = new FormControl(
         answer.answer_boolean_reply
       );

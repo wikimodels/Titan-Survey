@@ -96,14 +96,14 @@ export function getTestQuestionnaire() {
         question_answers: [
           {
             answer_id: 0,
-            answer_text: 'Силовые нагрузки',
+            answer_text: 'Силовые',
             answer_boolean_reply: false,
             answer_img_url: './assets/images/activity-pumping.jpg',
             answer_img_alt: 'Силовые нагрузки',
           },
           {
             answer_id: 1,
-            answer_text: 'Аэробные нагрузки',
+            answer_text: 'Аэробные',
             answer_boolean_reply: false,
             answer_img_url: './assets/images/activity-running.jpg',
             answer_img_alt: 'Аэробные нагрузки',

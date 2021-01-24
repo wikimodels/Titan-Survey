@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 import { SpecialImageMultiAnswerService } from '../services/question-services/special-image-multi-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { SnackBarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-special-image-multi-answer',
@@ -29,7 +29,7 @@ export class SpecialImageMultiAnswerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private imgService: SpecialImageMultiAnswerService,
     private questionnaireAnsweredService: QuestionnaireAnswersService
   ) {
@@ -76,7 +76,6 @@ export class SpecialImageMultiAnswerComponent implements OnInit, OnDestroy {
     ) {
       this.snackbarService.open(
         'Пожалуйста, выберите ответ на вопрос',
-        'x',
         MessageType.WARNING
       );
     } else {

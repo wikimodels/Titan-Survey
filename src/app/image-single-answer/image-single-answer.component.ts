@@ -10,12 +10,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 import { ImageSingleAnswerService } from '../services/question-services/image-single-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { SnackBarService } from '../services/snackbar.service';
 import { UserInfoService } from '../services/user-info.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private imageQuestionService: ImageSingleAnswerService,
     private questionnaireAnsweredService: QuestionnaireAnswersService
   ) {
@@ -90,7 +90,6 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
     ) {
       this.snackbarService.open(
         'Пожалуйста, выберите ответ на вопрос',
-        'x',
         MessageType.WARNING
       );
     } else {

@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
-import { SnackBarService } from '../services/snackbar.service';
+
 import { QuestionnaireService } from '../services/questionnaire.service';
 import { Subscription } from 'rxjs';
 import { RadioSingleAnswerService } from '../services/question-services/radio-single-answer.service';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 
 @Component({
   selector: 'app-single-radio-answer',
@@ -30,7 +31,7 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
     private questionnaireService: QuestionnaireService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService,
     private radioAnswerService: RadioSingleAnswerService
   ) {}
@@ -60,7 +61,6 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
     if (this.answersForm.value['answer_id'] == -1) {
       this.snackbarService.open(
         'Ответьте, пожалуйста, на вопрос!',
-        'X',
         MessageType.WARNING
       );
     } else {

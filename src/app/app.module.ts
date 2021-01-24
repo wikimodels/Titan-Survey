@@ -11,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MultipleAnswerCardComponent } from './multiple-answer-card/multiple-answer-card.component';`;
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SnackBarService } from './services/snackbar.service';
 import { SingleRadioAnswerComponent } from './single-radio-answer/single-radio-answer.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +27,7 @@ import { GreetingsComponent } from './greetings/greetings.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AnalyticsModule } from './analytics-module/analytics.module';
 import { SpecialImageMultiAnswerComponent } from './special-image-multi-answer/special-image-multi-answer.component';
+import { BasicSnackbarModule } from './basic-snackbar/basic-snackbar.module';
 
 @NgModule({
   declarations: [
@@ -55,10 +55,11 @@ import { SpecialImageMultiAnswerComponent } from './special-image-multi-answer/s
     FlexLayoutModule,
     RatingInputModule,
     AppMaterialModule,
+    BasicSnackbarModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [SnackBarService, CookieService],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

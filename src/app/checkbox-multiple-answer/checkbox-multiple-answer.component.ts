@@ -1,13 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageType } from 'src/models/message-types.model';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
-import { SnackBarService } from '../services/snackbar.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
 import { Subscription } from 'rxjs';
 import { CheckboxMultiAnswerService } from '../services/question-services/checkbox-multi-answer.service';
+import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
+import { MessageType } from '../basic-snackbar/models/message-type';
 
 @Component({
   selector: 'app-checkbox-multiple-card',
@@ -24,7 +24,7 @@ export class CheckboxMultipleAnswerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    private snackbarService: SnackBarService,
+    private snackbarService: BasicSnackbarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService,
     private chbxMultiAnswerService: CheckboxMultiAnswerService
   ) {
@@ -62,7 +62,6 @@ export class CheckboxMultipleAnswerComponent implements OnInit, OnDestroy {
     if (objectValues.every((key) => key === false)) {
       this.snackbarService.open(
         'Ответьте, пожалуйста, на вопрос!',
-        'X',
         MessageType.WARNING
       );
     } else {
