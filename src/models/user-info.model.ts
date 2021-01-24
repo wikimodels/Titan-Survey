@@ -3,7 +3,6 @@ export interface UserInfo {
   country: string;
   countryCode: string;
   deviceType: string;
-  img: string;
   ip: string;
   lat: number;
   lon: number;
@@ -11,6 +10,7 @@ export interface UserInfo {
   os_version?: string;
   browser?: string;
   location?: Location;
+  flagUrl?: string;
 }
 
 export interface Location {

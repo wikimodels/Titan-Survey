@@ -101,7 +101,7 @@ export class QuestionnaireService {
     this.setQuestionnaireSubj(questionnaire);
   }
 
-  getQuestionnaire() {
+  uploadQuestionnaire() {
     const testQuestionnaire = getTestQuestionnaire();
     this.http
       .post<Questionnaire>(UPLOAD_TEST_QUESTIONNAIRE(), testQuestionnaire)
