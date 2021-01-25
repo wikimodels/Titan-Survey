@@ -31,9 +31,30 @@ db.collection.aggregate([
   { "$match": { "totalDifference": { "$gte": 20 }}}
 ])
 
-Vibrate function. Good example
-https://dev.to/aminnairi/add-vibration-to-your-web-applications-n4l
+
+Server Side Rendering
+1) https://www.thirdrocktechkno.com/blog/server-side-rendering-with-angular-10/
+
+2) https://blog.logrocket.com/deploy-angular-9-apps-to-firebase-hosting/
+flex-layout and SSR
+3)https://github.com/angular/flex-layout/wiki/Using-SSR-with-Flex-Layout
+Handling window object
+4) https://www.npmjs.com/package/@ntegral/ngx-universal-window
 
 
 
+meta tags for home.component.ts
+https://fireship.io/lessons/angular-universal-firebase/
 
+SLACK apps
+https://api.slack.com/apps
+
+
+PRERENDER
+configure prerender file and npm run prerender
+https://www.youtube.com/watch?v=BmWYmoMeprU
+
+BEFORE RUNNING ANGULAR UNIVERSAL delete dist-folder!!!
+
+CHANGInG/DEPLOYING FireBASE functions
+https://firebase.google.com/docs/functions/manage-functions#modify
