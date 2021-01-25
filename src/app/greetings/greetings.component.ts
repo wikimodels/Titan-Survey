@@ -1,56 +1,69 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
+  Inject,
+  OnDestroy,
   OnInit,
-  Renderer2,
-  ViewChild,
+  PLATFORM_ID,
 } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { IsLoadingService } from '@service-work/is-loading';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Subscription } from 'rxjs';
+import { Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { GlobalObjectService } from '../services/shared/global-object.service';
 @Component({
   selector: 'app-greetings',
   templateUrl: './greetings.component.html',
   styleUrls: ['./greetings.component.css'],
 })
-export class GreetingsComponent implements OnInit, AfterViewInit {
+export class GreetingsComponent implements OnInit, OnDestroy {
+  windowRef: any;
+  sub: Subscription;
+  questionnaire: Questionnaire;
+
   constructor(
+    windowRef: GlobalObjectService,
+    @Inject(PLATFORM_ID) private platformId: object,
     private router: Router,
     private questionnaireService: QuestionnaireService,
-    public deviceService: DeviceDetectorService
-  ) {}
+    public deviceService: DeviceDetectorService,
+    private title: Title,
+    private meta: Meta
+  ) {
+    this.windowRef = windowRef.getWindow();
+  }
+  data = {
+    title: 'Опрос: Тренировки и Здоровье Позвоночника и Суставов',
+    description:
+      'Мы хотим узнать, как мы можем помочь Вам оставаться сильными, красивыми и здоровыми',
+    image: 'assets/images/open-graph.jpg',
+    type: 'website',
+    locale: 'en_us',
+  };
 
-  show = false;
-  frame = '';
-
-  chartWidth = '';
-  chartHeight = '';
   ngOnInit(): void {
-    if (this.deviceService.isMobile()) {
-      this.chartWidth = '340';
-      this.chartHeight = '280';
-      this.frame = 'mobile';
-    } else {
-      this.chartWidth = '640';
-      this.chartHeight = '480';
-      this.frame = 'mobile';
-    }
+    this.sub = this.questionnaireService.questionnaire$.subscribe((value) => {
+      this.questionnaire = value;
+    });
+    // this.title.setTitle('Titan Survey');
+    // this.meta.addTags([
+    //   { name: 'twitter:card', content: 'summary' },
+    //   { name: 'og:url', content: '/greetings' },
+    //   { name: 'og:title', content: this.data.title },
+    //   { name: 'og:description', content: this.data.description },
+    //   { name: 'og:image', content: this.data.image },
+    // ]);
   }
   startSurvey() {
-    window.navigator.vibrate(10);
-    const url = this.questionnaireService.getFirstQuestionUrl();
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     console.log('IsMobile', this.deviceService.isMobile());
-    this.router.navigate([url]);
+    this.router.navigate([this.questionnaire.first_question_url]);
   }
-
-  ngAfterViewInit() {}
-
-  loadIframe() {
-    this.frame = 'desktop';
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

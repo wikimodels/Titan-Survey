@@ -14,12 +14,12 @@ import { MessageType } from './models/message-type';
 })
 export class BasicSnackbarService {
   //create an instance of MatSnackBar
-  snackBarRef: MatSnackBarRef<any>;
+  //snackBarRef: MatSnackBarRef<any>;
   private snackBarConfig: MatSnackBarConfig;
   private horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   private verticalPosition: MatSnackBarVerticalPosition = 'top';
   private snackBarAutoHide = '3000';
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   open(message: string, type: MessageType) {
     this.snackBarConfig = new MatSnackBarConfig();
@@ -31,9 +31,13 @@ export class BasicSnackbarService {
     this.snackBarConfig.panelClass = sbClass;
     this.snackBarConfig.data = message;
 
-    this.snackBar.openFromComponent(
+    this._snackBar.openFromComponent(
       BasicSnackbarComponent,
       this.snackBarConfig
     );
+  }
+
+  dismiss() {
+    this._snackBar.dismiss();
   }
 }

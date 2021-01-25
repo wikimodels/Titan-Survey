@@ -1,10 +1,13 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewChecked,
   AfterViewInit,
   Component,
   HostListener,
+  Inject,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -16,7 +19,10 @@ import { MessageType } from '../basic-snackbar/models/message-type';
 import { ImageSingleAnswerService } from '../services/question-services/image-single-answer.service';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { UserInfoService } from '../services/user-info.service';
+import { GlobalObjectService } from '../services/shared/global-object.service';
+import * as defaults from '../../assets/utils/defaults.json';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { BasicSnackbarComponent } from '../basic-snackbar/basic-snackbar.component';
 
 @Component({
   selector: 'app-image-answer-card',
@@ -32,8 +38,10 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   rippleColor = 'rgba(255, 0, 0, 0.1)';
   gridWidth = '';
   rowheight = '';
-
+  windowRef: any;
   constructor(
+    windowRef: GlobalObjectService,
+    @Inject(PLATFORM_ID) private platformId: object,
     private deviceService: DeviceDetectorService,
     private route: ActivatedRoute,
     private router: Router,
@@ -42,11 +50,12 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
     private imageQuestionService: ImageSingleAnswerService,
     private questionnaireAnsweredService: QuestionnaireAnswersService
   ) {
+    this.windowRef = windowRef.getWindow();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.sub = this.questionnaireService.questionnaireSubj$.subscribe(
+    this.sub = this.questionnaireService.questionnaire$.subscribe(
       (questionnaire: Questionnaire) => {
         if (questionnaire.questions.length > 0) {
           const urlQuestionId = +this.route.snapshot.params['question_id'];
@@ -82,14 +91,16 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     if (
       this.question.question_answers.every(
         (q) => q.answer_boolean_reply === false
       )
     ) {
       this.snackbarService.open(
-        'Пожалуйста, выберите ответ на вопрос',
+        defaults.missingAnswerWarningMsg,
         MessageType.WARNING
       );
     } else {
@@ -99,10 +110,13 @@ export class ImageSingleAnswerComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     this.router.navigate([this.question.previous_question_url]);
   }
   ngOnDestroy() {
+    this.snackbarService.dismiss();
     this.sub.unsubscribe();
   }
 }

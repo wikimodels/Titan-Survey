@@ -31,5 +31,9 @@ db.collection.aggregate([
   { "$match": { "totalDifference": { "$gte": 20 }}}
 ])
 
+Vibrate function. Good example
+https://dev.to/aminnairi/add-vibration-to-your-web-applications-n4l
+
+
 
 

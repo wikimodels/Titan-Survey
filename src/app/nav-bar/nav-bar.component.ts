@@ -25,8 +25,8 @@ export class NavBarComponent implements OnInit {
   }
 
   startQ() {
-    const url = this.testQ.getQuestionnaireSubj().first_question_url;
-    this.router.navigate([url]);
+    //const url = this.testQ.getQuestionnaireSubj().first_question_url;
+    //this.router.navigate([url]);
   }
   getAllUsers() {
     this.userS.getAllAnsweredUsers();

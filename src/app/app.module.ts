@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppMaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SingleRadioAnswerComponent } from './single-radio-answer/single-radio-answer.component';
@@ -24,7 +24,7 @@ import { CheckboxMultipleAnswerComponent } from './checkbox-multiple-answer/chec
 import { ButtonSingleAnswerComponent } from './button-single-answer/button-single-answer.component';
 import { GreetingsComponent } from './greetings/greetings.component';
 import { CookieService } from 'ngx-cookie-service';
-import { AnalyticsModule } from './analytics-module/analytics.module';
+
 import { SpecialImageMultiAnswerComponent } from './special-image-multi-answer/special-image-multi-answer.component';
 import { BasicSnackbarModule } from './basic-snackbar/basic-snackbar.module';
 
@@ -47,17 +47,15 @@ import { BasicSnackbarModule } from './basic-snackbar/basic-snackbar.module';
   ],
   imports: [
     FormsModule,
-    BrowserModule,
-    AnalyticsModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule,
+    FlexLayoutModule.withConfig({ ssrObserveBreakpoints: ['xs', 'lt-md'] }),
     RatingInputModule,
     AppMaterialModule,
     BasicSnackbarModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    BackButtonDisableModule.forRoot(),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

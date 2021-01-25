@@ -59,13 +59,7 @@ const routes: Routes = [
     path: GREETINGS,
     component: GreetingsComponent,
   },
-  {
-    path: ANALYTICS,
-    loadChildren: () =>
-      import('./analytics-module/analytics.module').then(
-        (m) => m.AnalyticsModule
-      ),
-  },
+
   {
     path: COMPLETION,
     component: CompletionComponent,
@@ -73,7 +67,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', initialNavigation: 'enabled' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

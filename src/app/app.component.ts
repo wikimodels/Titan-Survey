@@ -18,6 +18,7 @@ import { QuestionnaireService } from './services/questionnaire.service';
 import { UserInfoService } from './services/user-info.service';
 import { GREETINGS } from './consts/routes.consts';
 import { CookieService } from 'ngx-cookie-service';
+import { Questionnaire } from 'src/models/questionnaire.model';
 
 @Component({
   selector: 'app-root',
@@ -27,9 +28,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'Titan Surver';
   isLoading$: Observable<boolean>;
+
   constructor(
     private userInfoService: UserInfoService,
-    private qService: QuestionnaireService,
+    private questionnaireService: QuestionnaireService,
     private isLoadingService: IsLoadingService,
     private router: Router,
     private coockieService: CookieService,
@@ -44,7 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.router.navigate([GREETINGS]);
 
     this.userInfoService.getUserInfo();
-    this.qService.getQuestionnaireByQid('d0819d57-e5d9-44f0-ab42-af03b231aefe');
+    // this.qService.getQuestionnaireByQid('d0819d57-e5d9-44f0-ab42-af03b231aefe');
     this.isLoading$ = this.isLoadingService.isLoading$();
 
     this.router.events
@@ -72,4 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 }
 
-//TODO:replace questionnaire with new version
+//TODO: don't forget to specify the region of ssr function in firebase.json file
+//TODO: try again to disable the back-button by installing package for fixing Universal window issue and disable-back-button package.
+//TODO:Refacto Questionnaire RxJS to make it work nicely
+//TODO: Fix landscape for large mobiles

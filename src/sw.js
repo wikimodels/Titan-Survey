@@ -1,5 +1,5 @@
 (function () {
-  const cacheName = "titan-v2";
+  const cacheName = "titan-v3";
   self.addEventListener("install", (event) => {
     event.waitUntil(
       caches.keys().then(function (keyList) {
@@ -34,18 +34,20 @@
             "./assets/images/spine-neck.jpg",
             "./assets/images/activity-running.jpg",
             "./assets/images/activity-pumping.jpg",
-            "./assets/images/yes1.jpg",
+            "./assets/images/yes.jpg",
             "./assets/images/dont-care.jpg",
             "./assets/images/spine-kyphosis.jpg",
             "./assets/images/spine-lordosis.jpg",
             "./assets/images/spine-scoliosis.jpg",
             "./assets/images/spine-ok.jpg",
+            "./assets/images/open-graph.jpg",
           ])
         )
     );
   });
 
   self.addEventListener("fetch", (event) => {
+    console.log("EVENT", event.request);
     event.respondWith(
       caches
         .match(event.request, { ignoreSearch: true })
@@ -59,18 +61,17 @@
             if (!response || response.status !== 200) {
               return response;
             }
-            var responseToCache = response.clone();
+            // var responseToCache = response.clone();
 
-            caches.open(cacheName).then(function (cache) {
-              if (
-                requestToCache.method === "GET" &&
-                !requestToCache.url.includes("webhooks")
-              ) {
-                console.log("PUT TO CACHE", requestToCache.url);
-                //cache.put(requestToCache, responseToCache);
-              }
-            });
-
+            // caches.open(cacheName).then(function (cache) {
+            //   if (
+            //     requestToCache.method === "GET" &&
+            //     !requestToCache.url.includes("webhooks")
+            //   ) {
+            //     console.log("PUT TO CACHE", requestToCache.url);
+            //     //cache.put(requestToCache, responseToCache);
+            //   }
+            // });
             return response;
           });
         })

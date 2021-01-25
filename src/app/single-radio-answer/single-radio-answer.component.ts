@@ -1,10 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
@@ -14,6 +15,11 @@ import { Subscription } from 'rxjs';
 import { RadioSingleAnswerService } from '../services/question-services/radio-single-answer.service';
 import { BasicSnackbarService } from '../basic-snackbar/basic-snackbar.service';
 import { MessageType } from '../basic-snackbar/models/message-type';
+import { isPlatformBrowser } from '@angular/common';
+import { GlobalObjectService } from '../services/shared/global-object.service';
+import * as defaults from '../../assets/utils/defaults.json';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { BasicSnackbarComponent } from '../basic-snackbar/basic-snackbar.component';
 
 @Component({
   selector: 'app-single-radio-answer',
@@ -21,6 +27,7 @@ import { MessageType } from '../basic-snackbar/models/message-type';
   styleUrls: ['./single-radio-answer.component.css'],
 })
 export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
+  windowRef: any;
   labelPosition: 'before' | 'after' = 'after';
   question: Question;
   answersForm: FormGroup;
@@ -28,16 +35,20 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor(
+    windowRef: GlobalObjectService,
+    @Inject(PLATFORM_ID) private platformId: object,
     private questionnaireService: QuestionnaireService,
     private route: ActivatedRoute,
     private router: Router,
     private snackbarService: BasicSnackbarService,
     private questionnaireAnsweredService: QuestionnaireAnswersService,
     private radioAnswerService: RadioSingleAnswerService
-  ) {}
+  ) {
+    this.windowRef = windowRef.getWindow();
+  }
 
   ngOnInit(): void {
-    this.sub = this.questionnaireService.questionnaireSubj$.subscribe(
+    this.sub = this.questionnaireService.questionnaire$.subscribe(
       (questionnaire: Questionnaire) => {
         if (questionnaire.questions.length > 0) {
           const urlQuestionId = +this.route.snapshot.params['question_id'];
@@ -56,11 +67,13 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     const answerId = this.answersForm.value['answer_id'];
     if (this.answersForm.value['answer_id'] == -1) {
       this.snackbarService.open(
-        'Ответьте, пожалуйста, на вопрос!',
+        defaults.missingAnswerWarningMsg,
         MessageType.WARNING
       );
     } else {
@@ -75,14 +88,19 @@ export class SingleRadioAnswerComponent implements OnInit, OnDestroy {
   }
 
   vibrate() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
   }
   goBack() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     this.router.navigate([this.question.previous_question_url]);
   }
 
   ngOnDestroy() {
+    this.snackbarService.dismiss();
     this.sub.unsubscribe();
   }
 }

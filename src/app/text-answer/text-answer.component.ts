@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Question, Questionnaire } from 'src/models/questionnaire.model';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { GlobalObjectService } from '../services/shared/global-object.service';
 
 @Component({
   selector: 'app-text-answer',
@@ -16,16 +18,21 @@ export class TextAnswerComponent implements OnInit {
   answersForm: FormGroup;
   showBackwardButton: boolean;
   sub: Subscription;
+  windowRef: any;
 
   constructor(
+    windowRef: GlobalObjectService,
+    @Inject(PLATFORM_ID) private platformId: object,
     private questionnaireService: QuestionnaireService,
     private route: ActivatedRoute,
     private router: Router,
     private questionnaireAnsweredService: QuestionnaireAnswersService
-  ) {}
+  ) {
+    this.windowRef = windowRef.getWindow();
+  }
 
   ngOnInit(): void {
-    this.sub = this.questionnaireService.questionnaireSubj$.subscribe(
+    this.sub = this.questionnaireService.questionnaire$.subscribe(
       (questionnaire: Questionnaire) => {
         if (questionnaire.questions.length > 0) {
           const urlQuestionId = +this.route.snapshot.params['question_id'];
@@ -44,7 +51,9 @@ export class TextAnswerComponent implements OnInit {
   }
 
   onSubmit() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     const textValue = this.answersForm.value['wishes'];
     console.log(textValue);
     this.question.question_text_answer = this.answersForm.value['wishes'];
@@ -54,7 +63,9 @@ export class TextAnswerComponent implements OnInit {
   }
 
   goBack() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
     this.router.navigate([this.question.previous_question_url]);
   }
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { GET_VIBER_GROUP } from '../../app/consts/urls.consts';
 import { QuestionnaireAnswersService } from '../services/questionnaire-answers.service';
+import { GlobalObjectService } from '../services/shared/global-object.service';
 @Component({
   selector: 'app-completion',
   templateUrl: './completion.component.html',
@@ -8,12 +10,21 @@ import { QuestionnaireAnswersService } from '../services/questionnaire-answers.s
 })
 export class CompletionComponent implements OnInit {
   viber_group = GET_VIBER_GROUP();
-  constructor(private qAnswers: QuestionnaireAnswersService) {}
+  windowRef: any;
+  constructor(
+    windowRef: GlobalObjectService,
+    @Inject(PLATFORM_ID) private platformId: object,
+    private qAnswers: QuestionnaireAnswersService
+  ) {
+    this.windowRef = windowRef.getWindow();
+  }
 
   ngOnInit(): void {
     this.qAnswers.saveAnswersToCloud();
   }
   vibrate() {
-    window.navigator.vibrate(10);
+    if (isPlatformBrowser(this.platformId)) {
+      window.navigator.vibrate(10);
+    }
   }
 }
